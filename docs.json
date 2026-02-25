@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "created": "2026-02-22T04:21:00Z",
+    "lastUpdated": "2026-02-22T04:21:00Z"
+  },
+  "documents": [
+    {
+      "id": "doc-001",
+      "filename": "revenue-report.md",
+      "title": "Revenue Generation Report",
+      "path": "docs/revenue-report.md",
+      "description": "Analysis of 5 monetization opportunities: AI image prompts, local business automation, subscription AI assistant, niche content sites, custom code service",
+      "keywords": ["revenue", "money", "monetization", "business", "automation", "passive income", "subscription", "prompt engineering", "stable diffusion", "image generation", "local business", "ai employee", "content website", "affiliate", "code service", "fiverr", "gig economy"],
+      "topics": ["business", "revenue", "automation", "side hustle"],
+      "createdAt": "2026-02-21T16:31:00Z",
+      "indexedAt": "2026-02-22T04:21:00Z"
+    }
+  ]
+}
