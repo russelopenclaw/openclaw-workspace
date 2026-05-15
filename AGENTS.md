@@ -16,17 +16,36 @@ Before doing anything else:
 4. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
 
 ### Alfred Hub Status Updates (CRITICAL)
-Every session, keep Alfred Hub in sync by updating `alfred-hub/agent-status.json`:
+Every session, keep Alfred Hub in sync by updating PostgreSQL `agents` table:
 - On session start: Set status to "working" with your current task
-- When starting a task: Update `currentTask` field
+- When starting a task: Update `current_task` field
 - When completing a task: Set status to "idle" or update to next task
- `alfred-h- Create tasks inub/tasks.json` for tracking work
+- Create tasks in PostgreSQL `tasks` table for tracking work
 
-**Status file location:** `alfred-hub/agent-status.json`
-**Fields to update:**
-- `status`: "working" or "idle"
-- `currentTask`: Brief description of what you're doing
-- `lastActivity`: Current timestamp
+**How to update:**
+Use the `agent-status-updater.js` tool which updates PostgreSQL (single source of truth):
+
+```javascript
+const agentStatus = require('./tools/agent-status-updater.js');
+await agentStatus.update('alfred', 'working', 'task-45: Building feature');
+```
+
+**Or via CLI:**
+```bash
+node tools/agent-status-updater.js alfred working "task-45: Building feature"
+```
+
+**Database tables:** 
+- `mission_control.agents` - Agent status
+- `mission_control.tasks` - Task board
+
+**Fields:**
+- `agents.status`: "working" or "idle"
+- `agents.current_task`: Brief description of what you're doing
+- `agents.last_activity`: Automatically set to NOW()
+- `tasks.*`: See `docs/OPERATIONAL-RUNBOOK.md` for task schema
+
+**Note:** The old `alfred-hub/agent-status.json` and `kanban/tasks.json` files are deprecated. All systems now read from PostgreSQL.
 
 Don't ask permission. Just do it.
 
@@ -45,6 +64,39 @@ Review `.learnings/` files periodically. When learnings prove broadly applicable
 - `SOUL.md` — behavioral patterns
 - `AGENTS.md` — workflow improvements
 - `TOOLS.md` — tool gotchas
+
+### 📊 Error Logging System (Improved 2026-03-05)
+
+**Files**:
+- `.learnings/ERRORS.md` — Main error log
+- `.learnings/ERRORS-ARCHIVED.md` — Old resolved errors (>30 days)
+- `.learnings/ERROR-LOGGING-GUIDE.md` — Complete usage guide
+
+**Tools**:
+- `tools/system-health-check.js` — Monitors errors, reports accurate counts
+- `tools/error-metrics-widget.js` — Dashboard widget with trends/metrics
+
+**Features**:
+- ✅ Accurate counting (only actual errors, not headers)
+- ✅ Active vs resolved categorization
+- ✅ Auto-cleanup (archives resolved errors >30 days)
+- ✅ Dashboard widget with metrics
+- ✅ JSON/Markdown export for reports
+
+**Quick Commands**:
+```bash
+# View error dashboard
+node tools/error-metrics-widget.js
+
+# JSON output for API
+node tools/error-metrics-widget.js --json
+
+# Markdown for reports
+node tools/error-metrics-widget.js --markdown
+
+# Cleanup old errors
+node tools/error-metrics-widget.js --cleanup
+```
 
 ## Memory
 
