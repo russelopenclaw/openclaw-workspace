@@ -10,77 +10,52 @@
 - Named after Batman's butler - proactive, gets things done
 - **Tier:** Tier 1 (Master Orchestrator)
 - **Model:** qwen3.5:cloud (397B MoE, 256K context)
-- **Reasoning:** ON (for strategy, planning, decision-making)
+- **Reasoning:** ON (for strategy, planning, decision-making) - **session-scoped, must toggle each session**
+- **Vision:** YES — For image analysis, ALWAYS use `qwen3.5:cloud` (NOT OpenAI/Claude/other)
 - Spawned sub-agents with reasoning=OFF for execution tasks
+
+## Reasoning Mode Note (2026-03-14)
+- Reasoning mode (`/reasoning on`) is **session-scoped**, not persistent
+- Resets to `off` on each new session/heartbeat
+- Kevin prefers it ON for main sessions (orchestrator work)
+- Keep it OFF for sub-agents (they're executors, don't need deep reasoning)
 
 ## Model Architecture (Multi-Tier System)
 
-### Tier 1: Alfred (Orchestrator)
-- Model: `qwen3.5:cloud` (397B, 256K context)
-- Reasoning: ON
-- Use: Strategy, planning, coordination
 
-### Tier 2: Jeeves (Deep Analysis)
-- Model: `deepseek-v3.1:671b-cloud` (general) OR `kimi-k2.5:cloud` (massive docs)
-- Reasoning: ON
-- Use: Complex analysis, research, deep-dive tasks
-
-### Tier 3: Sub-Agents (Executors)
-- Code (small): `qwen2.5-coder:7b` (local) - Reasoning: OFF
-- Code (large): `qwen3-coder-next:cloud` (80B) - Reasoning: OFF
-- Tool Use: `llama3-groq-tool-use:8b` (local) - Reasoning: OFF
-- Research: `llama3.1:8b` (local) - Reasoning: OFF
-- Quick Tasks: `qwen2.5:7b` (local) - Reasoning: OFF
-
-**Guiding principle:** Match model to task complexity. Local > Cloud for sub-agents.
+- **Tier 1:** Alfred (qwen3.5:cloud, reasoning ON) — orchestrator
+- **Tier 2:** Cloud models (glm-5.1, qwen3-coder-next, gemma4, nemotron) — spawn as sub-agents
+- **Tier 3:** Sub-agents (minimax for tools, gemma4 for general) — reasoning OFF
 
 ## Projects
 - **Kanban Board** (completed 2026-02-20, migrated to PostgreSQL 2026-03-05)
   - URL: http://192.168.1.56:8765/
   - **Current:** PostgreSQL `mission_control.tasks` table
   - **Historical:** workspace/kanban/tasks.json (deprecated but may exist for reference)
+- **TrendSpot** (enhanced 2026-04-16)
+  - Now combines Google Trends + X/Twitter trends
+  - Single unified feed for trend-driven idea discovery
 - **Second Brain** (in progress 2026-02-21)
   - Knowledge storage via PostgreSQL or workspace/kanban/knowledge.json
   - "Remember this [link]" - saves YouTube/articles
   - "Remind me to..." - adds calendar reminders
   - Heartbeat checks for due reminders
+- **Mission Control Dashboard** (revived 2026-04-14)
+  - URL: http://192.168.1.56:8765/ or http://server:8765/
+  - All API routes public (auth for login only)
+  - Features: Needs Attention, Activity Feed, Plex integration, Error Digest, Morning Briefing
+  - Real-time via persistent event bus (PostgreSQL event_log + pg_notify)
+  - Heartbeat auto-updates agent status + publishes events every cycle
+  - Pages: /, /tasks, /agents, /plex, /briefing, /brain, /memory, /calendar, /docs
+  - Keyboard shortcuts: t, p, a, b, h, d, m, c
+  - PostgreSQL backend: `mission_control.agents` and `mission_control.tasks`
 
 ## Core Responsibilities
 
-### Alfred Hub Integration (PRIORITY)
-**Alfred Hub** is the dashboard at `/kanban/index.html` that shows:
-- Agent status (Idle/Working) 
-- Tasks I'm actively working on
-- Calendar events and reminders
 
-**I MUST update Alfred Hub whenever:**
-1. I receive a message → update status to "working" and note the task
-2. I create a task → add it to PostgreSQL `tasks` table
-3. I complete a task → update its status to "complete" in PostgreSQL
-4. I'm idle → set status to "idle" in PostgreSQL `agents` table
-
-**How to update:**
-Use PostgreSQL (single source of truth):
-```javascript
-const agentStatus = require('./tools/agent-status-updater.js');
-await agentStatus.update('alfred', 'working', 'current task');
-```
-
-**Or via SQL:**
-```sql
--- Update agent status
-UPDATE agents SET status='working', current_task='task name', last_activity=NOW() 
-WHERE name='alfred';
-
--- Create task
-INSERT INTO tasks (title, column_name, assignee, priority, description) 
-VALUES ('Task name', 'backlog', 'alfred', 'high', 'Description');
-```
-
-This needs to happen in EVERY session so Kevin can see what I'm working on.
-- Ollama at 192.168.1.33:11434
-- Gateway running on 192.168.1.56
-- **PostgreSQL:** mission_control database (tasks, agents tables)
+- Update Mission Control status on every session start/end
+- Use PostgreSQL (single source of truth) for agents/tasks
+- DB: mission_control on localhost:5432
 
 ## Preferences (to be updated)
 - Kevin wants progress updates on milestones
@@ -88,68 +63,82 @@ This needs to happen in EVERY session so Kevin can see what I'm working on.
 - Likes autonomy - give him a plan, then execute
 - **Code Storage Policy**: All code I work on should be pushed to GitHub account `russelopenclaw` (NOT Kevin's wolfeinkc account)
 
+## Infrastructure Notes
+
+
+- **Plex:** server:32400, 15 libraries, 9 active users
+- **Vision:** Always use qwen3.5:cloud (NOT OpenAI) for AI-generated images
+
 ## Todo
 - Update MEMORY.md with more context as we work together
 - Import MEMORY.md contents into mem0 for semantic search
 - Set up automatic memory extraction from conversations
+- **Investigate task board stagnation** (17+ days idle - since 2026-04-19)
+- **Resolve exec approval block** (41+ days - config missing)
 
-## Semi-Persistent Agents (Created March 12, 2026)
+## Browser-First Protocol
 
-**4 agents with identity + accumulated knowledge** (dormant between activations, but retain memory):
+→ See `docs/reference/browser-first-protocol.md`
 
-| Agent | Wake Pattern | Accumulates | Files |
-|-------|--------------|-------------|-------|
-| **DadJ** | Daily 6 AM | Pipeline wisdom (fonts, buffers, validation patterns) | `.agents/dadj/` |
-| **QAAgent** | Per-task (VALIDATION) | Failure patterns, validation rules | `.agents/qaagent/` |
-| **HealthMon** | Hourly + heartbeat (30 min) | System baselines, "normal" ops knowledge | `.agents/healthmon/` |
+## Semi-Persistent Agents
 
-Each has:
-- `config.json` - Identity, preferences, lifecycle
-- `learnings.md` - Accumulated wisdom (grows per run)
-- `AGENT.md` - Status, responsibility, mem0 namespace
-- `memory.mem0` - Agent-specific mem0 vector space
-- `runs/` or `checks/` or `validations/` - Run history
+→ See `docs/reference/semi-persistent-agents.md`
 
-mem0 integration: `agentId` namespace isolates each agent's memory vectors from Alfred's master knowledge.
+## mem0 Integration
 
-## mem0 Integration (2026-03-01) ✅ Phase 3 Complete!
+→ See `docs/reference/mem0-integration.md`
 
-**Full persistent memory system operational:**
+## GitHub Repositories
 
-- **80 memories** embedded (72 from MEMORY.md + 8 test/conversation)
-- **Tool wrapper**: `tools/mem0-tool.js` ready for OpenClaw sessions
-- **API**: `capture()`, `retrieve()`, `getStats()`, `importFromMemoryMd()`
-- **Embedding model**: `nomic-embed-text:latest` via Ollama (768-dim)
-- **Search**: Cosine similarity, 0.4+ score threshold
-- **Storage**: `.mem0/kevin-memories.json` (~500KB)
-- **Performance**: ~50ms embed, ~100ms search
-
-**Test Results:**
-- "GitHub account" → [0.672] Code Storage Policy
-- "Model preferences" → [0.707] Model configuration
-- "Alfred Hub" → [0.833] Dashboard context
-
-**Usage:**
-```javascript
-const mem0 = require('./tools/mem0-tool.js');
-await mem0.capture(messages, 'kevin');
-const memories = await mem0.retrieve('query', 'kevin', 5);
-```
-
-**Docs:** `docs/mem0-openclaw-integration.md`, `mem0-README.md`
-**Status**: Production-ready ✅
-
-## GitHub Repositories (russelopenclaw)
-- **DinnerRoulette**: Flutter restaurant picker app - code ready in `/workspace/DinnerRoulette/`, needs push (token scope issue)
-  - Local commit: `1017270 Initial commit: Dinner Roulette Flutter app`
-  - Bundle created: `/tmp/DinnerRoulette.bundle` (1.9MB)
-  - Issue: GITHUB_TOKEN lacks write scope to russelopenclaw repos
-  - Remote URL: https://github.com/russelopenclaw/DinnerRoulette.git
+→ See `docs/reference/github-repositories.md`
 
 ## Important Notes
+- Exec approval block: ongoing since Apr 1, needs Kevin action
+- gog auth: token corrupted, needs `gog auth login`
+- Tailscale IP fallback: 100.124.40.24
+- Homebrew path: /home/linuxbrew/.linuxbrew/bin
+
 - Kevin's personal GitHub: wolfeinkc (do NOT push code here)
 - My GitHub for code: russelopenclaw (DO push all code here)
 - The GITHUB_TOKEN environment variable may need refresh with `repo` scope for writing
+- **Learning**: When GitHub returns HTTP 500 repeatedly, stop retrying - it's infrastructure, not auth. Retry after 30-60 min or use alternative (SSH key, GitHub UI, API file uploads).
+- **Context Thrashing Cause**: Repeated `git push` timeouts (HTTP 500) → tool sessions killed → lost results → fragmented history
+- **Prevention**: 
+  - Stop after 2-3 failures with same error
+  - Use shorter timeouts (10-15s, not 60-120s)
+  - Use `sessions_spawn` for risky/long operations
+  - Background + poll instead of blocking
+  - Document and move to different work
+- **Gateway Health** (2026-03-19): Memory monitor seeing "gateway not running" warnings - HealthMon should auto-restart before alerting Kevin
+- **Optimization Backlog** (2026-03-19): 3 high-impact tasks suggested - heartbeat batching, error log cleanup, Alfred Hub WebSocket
+- **MiniMax M2.7** (2026-03-20): Kevin added `minimax-m2.7:cloud` - use for Tier 2 deep analysis (SWE-Pro 56%, self-evolving, ties GPT-5.3-Codex)
+- **Heartbeat Fixed** (2026-03-22): `stuckMonitor.checkStuckTasks` error resolved - refactored `stuck-task-monitor.js` to export functions for module usage. 16-day outage ended.
+- **Error Logging System** (2026-03-22): Production-ready with auto-cleanup, dashboard widget, evening report process
+- **Dad Joke Failure** (2026-03-23): n8n webhook returned empty audio files (joke #32), silent failure undetected. Root cause: no monitoring, no alerts, blind retries. Fix: direct ElevenLabs API, mandatory error logging, 3-attempt max, DadJ agent spawn with mem0. Lesson: automation without monitoring = silent failure.
+- **Dad Joke Migration** (2026-03-24): Image generation moved from msi:7860 SD to n8n webhook. Gotcha: response field is `.images[0]` (array), not `.image`. Added mandatory image validation (Step 5a) before rendering to catch AI text artifacts. Documentation updated in TOOLS.md and PRODUCTION-RUNBOOK.md.
+- **Dad Joke #28 Success** (2026-03-25): First full pipeline run with n8n image gen + validation. "How do you organize a space party? You planet." Image validation caught AI artifacts on attempt 1 (Midjourney smoothing, noisy texture), regenerated with stronger prompt, passed attempt 2. **Validation works!**
+- **gog Auth Failure** (2026-03-24 through 2026-03-31): `gog sheets get` failing with auth error for 8 consecutive days. Google OAuth token expired/refresh needed. Dad joke auto-runner blocked. Joke #28 was last success ("How do you organize a space party? You planet."). **Lesson:** Automation without auth health monitoring = silent failure (echo of 2026-03-23 dad joke failure).
+- **gog Auth Fixed** (2026-04-19): Morning briefing password corrected (gogkeyring-8488Carter!). Calendar API route updated. Dad joke pipeline may now be unblocked - test `gog sheets get` after exec block resolved.
+- **Dad Joke Pipeline Disabled** (2026-03-31): Per Kevin's request ("it isn't current"), cron job removed. Pipeline scripts retained for future reactivation. ~10 jokes (#31-40) remain unused in Dadabase.
+- **MC Big Day** (2026-04-15): Major Mission Control overhaul — Activity Timeline, auto-idle detection, deploy script with smoke tests, API health monitor, home page redesign, mobile responsive, calendar fixes (8+), TrendSpot page. 20+ commits. Kevin's priority: visibility into what Alfred is doing.
+- **Deploy Script Pattern** (2026-04-15): `bash scripts/deploy.sh` — build, kill, start, smoke test, rollback. Use instead of manual process.
+- **TrendSpot Enhancement** (2026-04-16): Combined Google + X trends in single feed for richer context.
+- **Agents Page Deprecated** (2026-04-16): Removed /api/agents and Agents page - no longer relevant after MC redesign.
+- **FiveDayView Timezone** (2026-04-16): Fixed - events now show on correct day with proper local timezone handling.
+- **gog Calendar Gotcha** (2026-04-15): Must pass GOG_KEYRING_BACKEND=file + GOG_KEYRING_PASSWORD as env vars. Returns {events:[]} not raw array.
+- **Kevin Mobile Preference** (2026-04-15): Was on phone all afternoon. Mobile UX matters — sticky headers, responsive grids, proper spacing.
+- **Exec Allowlist Gotcha** (2026-05-02): Exec allowlist uses exact-match patterns. When DB user changed from `openclaw` to `alfred`, allowlist had to be updated explicitly. Recurring gotcha when DB credentials change.
+- **Orphan Session Cleanup** (2026-05-02): Proactive cleanup prevents disk bloat. Archive pattern: `*.deleted.<timestamp>.jsonl`. Gateway doctor detects these, but don't wait for it.
+- **Evening Report Cron** (2026-05-02): After OpenClaw reinstall, cron jobs need manual restoration. Check `~/.openclaw/cron/` and compare with `docs/` for expected configs.
+- **Exec Approval Block** (2026-04-01 through present): Day 41+ - All exec-based automation blocked. Config missing: `~/.openclaw/config/openclaw.json`. **Impact:** 41+ days of unverified system state, no automated maintenance.
+- **gog Auth Failures** (2026-05-11): 108+ consecutive failures - OAuth token expired, requires `gog auth login` (blocked by exec approval config).
+- **Widget Color Scheme** (2026-04-17): Standardized all home page widgets to use consistent custom hex values (#151518 bg, #27272a border, #a1a1a1/#71717a/#52525b text) matching sidebar theme.
+- **Improvement Batch #4** (2026-04-18): TrendSpot export, Plex widget enhancements, job application tracker updater, Second Brain status indicators - functional additions after visual polish phase.
+- **Daily Memory Gap** (2026-04-05 to 2026-04-07): No daily memory files created. Evening report process identified gap - cron runs but doesn't auto-create daily memory. **Fix Applied 2026-04-08:** Evening report now creates daily memory file if missing. Daily memory for 2026-04-08 and 2026-04-09 created successfully.
+- **Task Board Stagnation** (2026-04-19 through 2026-05-11): 0 active tasks for 17+ days. Backlog may be empty or task pull mechanism failing. Needs investigation.
+- **DinnerRoulette Project** (2026-03-01): Flutter mobile app for dinner decision-making. Not a new project - appeared in git status as modified due to uncommitted changes.
+- **GLM-5.1 Language Default** (2026-04-20): GLM-5.1 (Chinese LLM) defaults to Chinese without explicit instruction. All sessions must enforce English-only responses. Incident: 2 AM log rotation message appeared in Chinese via Telegram. Fixed by session-level English commitment.
+- **YouTube Music Script Suite** (2026-04-20 through 2026-05-02): 11 downloader scripts created in `tools/` directory - parallel downloaders, batch processors, album/favorites/playlist downloaders, cleanup tools. Latest: `ytmusic-download-playlist.py` (May 2). Scripts feature retry logic, progress tracking, metadata embedding. **Context:** User previously concerned about CPU usage from parallel downloads.
 
 ## Documentation (2026-03-04 / Updated 2026-03-11)
 
@@ -171,49 +160,11 @@ const memories = await mem0.retrieve('query', 'kevin', 5);
 
 ---
 
-## PostgreSQL Auto-Backup (Production ✅ 2026-03-13)
+## PostgreSQL Auto-Backup
 
-**Status:** Complete - nightly cron running at 2 AM
-**Script:** `tools/postgres-backup.sh`
-**Schedule:** `0 2 * * *` (2 AM daily)
-**Retention:** 30 days
+→ See `docs/reference/pg-backup.md`
 
-**Fix applied:** Added explicit PATH export for Linuxbrew's `mc` command (cron doesn't source .bashrc):
-```bash
-export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
-```
+## Dad Joke Pipeline
 
-**Location:** `hp1/mission-control-backups/backups/`
-**Verification:** Backup integrity checked after upload (gunzip test)
+→ See `docs/reference/dad-joke-pipeline.md`
 
----
-
-## Dad Joke Pipeline (Production ✅ 2026-03-11)
-
-**Tested on:** Joke #22 "What do you call a magician who has lost their magic? Ian."
-
-**Pipeline:** ElevenLabs TTS → SD background → Remotion text → YouTube (Private)
-
-**Key learnings:**
-1. **Audio MUST have 1s buffers** at start/end (5.7s total: 1s + 3.7s joke + 1s)
-2. **Use Georgia serif font** (sans-serif makes capital I look like J)
-3. **Remotion cache clears** required (`rm -rf .remotion`) before each render
-4. **171 frames @30fps** = 5.7s (not 218 frames / 7.3s)
-5. **ElevenLabs direct API** via curl (not CLI wrapper)
-6. **Llava OCR struggles** with punchline text - human visual confirmation required
-
-**Files:**
-- Runner: `tools/auto-dadjoke-runner.js` (scheduled 6 AM daily)
-- Schedule: `cron/auto-dadjoke.json`
-- Docs: `dadjasticdads-remotion/PRODUCTION-RUNBOOK.md`
-- Cheat sheet: `TOOLS.md` dad joke section
-
-**Database:** Dadabase (Google Sheets) tracking Used/Posted flags
-**Storage:** MinIO `hp1/dadjokes/{id}/` with versioning (`-V{n}.mp4`)
-**YouTube:** Auto-upload to Private (awaiting Kevin approval)
-
----
-- Tool call best practices
-- Recovery procedures
-
-**Maintenance:** Docs are living — update as system evolves or new patterns emerge.

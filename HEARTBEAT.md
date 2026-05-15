@@ -20,7 +20,71 @@
 
 ---
 
+## Browser-First Protocol (Added 2026-03-20)
+
+**When user reports a problem with a UI/feature:**
+
+1. **STOP** - Don't ask questions or make assumptions
+2. **OPEN BROWSER** - Navigate to the affected page
+3. **SNAPSHOT** - See exactly what user sees
+4. **TEST** - Click buttons, check state, verify behavior
+5. **REPORT** - Tell user what I found + what I'm fixing
+
+**Before destructive actions (delete/move/overwrite):**
+1. **LIST** - What files exist?
+2. **CHECK** - What will be affected?
+3. **BACKUP** - Move/copy before delete
+4. **VERIFY** - Confirm the change worked
+
+**Trigger phrases:** "It's broken", "It shows X", "Nothing happens", "Can you check"
+**My response:** "Let me verify" → [use browser/exec] → [report findings]
+
+**Remember:** I have the tools. I'm capable. **Use them.** Don't ask user to verify what I can check myself.
+
+---
+
+## Reminders Check (Every Heartbeat)
+
+Check Mission Control `reminders` table for due reminders:
+
+```sql
+SELECT id, title, due_date, due_time, description 
+FROM reminders 
+WHERE due_date <= CURRENT_DATE 
+  AND completed = false
+ORDER BY due_date, due_time;
+```
+
+If reminders are due:
+1. **Send Telegram alert** using `message` tool (not just chat reply)
+2. Mark completed after discussion/action
+
+**Telegram alert format:**
+```
+🔔 Reminder Due: [Title]
+[Description]
+Due: [time]
+```
+
+**Example:** On 2026-03-30, remind Kevin to review Model Awareness approach.
+
+---
+
 ## Critical Checks (Every Heartbeat)
+
+### Log Size Monitoring (NEW - 2026-03-17)
+**Why:** Prevent 500MB log disaster that occurred 2026-03-16/17
+- **Check:** `/tmp/openclaw/openclaw-*.log` files
+- **Threshold:** Alert if any log > 50MB (before 10MB cap hits)
+- **Action:** If >50MB, run `tools/rotate-logs.sh` immediately
+- **Cron backup:** Daily rotation at 2 AM via `cron/log-rotation.json`
+
+```bash
+# Quick check
+ls -lh /tmp/openclaw/*.log | awk '$5 ~ /G|M/ {print "WARNING: Large log:", $0}'
+# If warning, run rotation
+bash tools/rotate-logs.sh
+```
 
 ### Optimized Runner (Primary Orchestrator)
 - **Call:** `tools/heartbeat-runner.js` from Alfred session
@@ -225,23 +289,24 @@ All run together when any is due, respecting individual TTLs.
 
 ---
 
-## Stuck Task Protocol (Autonomous) - Cached but Sensitive
+## Stuck Task Protocol (Autonomous)
 
-**Cached for:** 3 minutes  
-**Invalidated when:** Stuck task count changes
+**Detection threshold: 6 hours** (we operate at millisecond level)
 
 **Triggers:**
-1. Task `in-progress` >30 min, no subagent session active
-2. Task `in-progress` >2 hours, no history updates
-3. Subagent session exists but no recent activity
+1. Task `in-progress` >6 hours with no progress updates
+2. Subagent session died without completion
+3. Dependency blocked (task waiting on another task)
 
-**Actions:**
-- **<30 min**: Monitor only
-- **30-60 min**: Auto-kill subagent, respawn with same task (retry #1)
-- **1-2 hours**: Auto-kill subagent, respawn with same task (retry #2)
-- **>2 hours**: Mark task blocked, reassign to different agent, log to `.learnings/ERRORS.md`
+**Actions (escalation ladder):**
+- **<6 hours**: Monitor only, no action
+- **6-12 hours**: Auto-recovery: kill hung subagent, respawn with same task
+- **12-24 hours**: Try alternative approach/model, log attempt
+- **>24 hours**: Mark BLOCKED, document what was tried, ONLY THEN notify Kevin
 
-**Do NOT notify Kevin** — handle autonomously.
+**Post-mortem trigger:** If 3+ tasks in an epic OR multiple agents involved → write post-mortem
+
+**Do NOT notify Kevin** unless truly blocked after exhausting options.
 
 ---
 
