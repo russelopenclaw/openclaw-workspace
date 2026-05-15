@@ -1,0 +1,55 @@
+.vercel
+
+# Large media files - use /mnt/openclaw for storage
+*.mp4
+*.mp3
+*.wav
+*.avi
+*.mov
+*.mkv
+*.webm
+*.flac
+*.ogg
+
+# Screensavers and video projects
+screensavers/
+screensaver-gallery/
+segments/
+segments30/
+segments64/
+segments_nl/
+images/
+
+# Secrets
+client_secret.json
+*.secret
+.env
+
+# Node
+node_modules/
+
+# Python venvs
+whisper-env/
+*-env/
+venv/
+
+# Build artifacts
+*.next/
+*.deploy-backups/
+
+# Temp files
+/tmp/
+*.tmp
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# OpenClaw internals
+.openclaw/
+.clawhub/
+.herenow/
+.alert-queue.json
+.briefing-queue.json
+.briefing-queue-tmp.json
