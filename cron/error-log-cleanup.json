@@ -1,0 +1,20 @@
+{
+  "name": "auto-cleanup-errors",
+  "description": "Weekly error log cleanup: archive old errors, dedupe repeated errors",
+  "schedule": "0 3 * * 0",
+  "timezone": "America/Chicago",
+  "enabled": true,
+  "script": "/home/kevin/.openclaw/workspace/tools/error-metrics-widget.js --cleanup",
+  "runConditions": {
+    "checkIdempotency": true,
+    "skipIfAlreadySent": false
+  },
+  "notification": {
+    "onSuccess": false,
+    "onFailure": true
+  },
+  "logging": {
+    "file": "/home/kevin/.openclaw/workspace/.learnings/ERROR-CLEANUP.log",
+    "level": "INFO"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Job Listings Auto-Update",
+  "schedule": {
+    "kind": "cron",
+    "expr": "0 6 * * *",
+    "tz": "America/Chicago"
+  },
+  "payload": {
+    "kind": "agentTurn",
+    "message": "IMPORTANT: Respond in English only. Run the job listings updater: `node /home/kevin/.openclaw/workspace/tools/job-listings-updater.js`. Then check if any new jobs were found and update the MC jobs API data if needed. Report summary to Kevin via Telegram if there are new jobs worth noting.",
+    "model": "qwen3.5:cloud",
+    "thinking": "off",
+    "timeoutSeconds": 120
+  },
+  "sessionTarget": "isolated",
+  "enabled": true,
+  "delivery": {
+    "mode": "silent"
+  }
+}

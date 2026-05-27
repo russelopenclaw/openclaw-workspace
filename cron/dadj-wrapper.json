@@ -1,0 +1,8 @@
+{
+  "name": "Dad Joke Daily Task",
+  "schedule": "0 6 * * *",
+  "command": "node /home/kevin/.openclaw/workspace/tools/dadjoke-n8n-orchestrator.js",
+  "description": "Daily 6 AM dad joke generation via n8n hybrid pipeline",
+  "cwd": "/home/kevin/.openclaw/workspace",
+  "env": {"WORKSPACE": "/home/kevin/.openclaw/workspace"}
+}

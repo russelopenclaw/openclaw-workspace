@@ -1,0 +1,17 @@
+{
+  "name": "openclaw-commands",
+  "version": "1.0.0",
+  "description": "Alfred command handlers for Telegram integration",
+  "main": "remember.js",
+  "scripts": {
+    "test": "node remember.js"
+  },
+  "keywords": [
+    "alfred",
+    "commands",
+    "telegram",
+    "brain"
+  ],
+  "author": "Alfred",
+  "license": "ISC"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "auto-dadjoke",
+  "description": "Generate dad joke video daily at 6 AM",
+  "schedule": "0 6 * * *",
+  "timezone": "America/Chicago",
+  "enabled": true,
+  "script": "/home/kevin/.openclaw/workspace/tools/auto-dadjoke-runner.js",
+  "runConditions": {
+    "checkIdempotency": true,
+    "skipIfAlreadySent": true
+  },
+  "notification": {
+    "onSuccess": false,
+    "onFailure": true
+  },
+  "logging": {
+    "file": "/home/kevin/.openclaw/workspace/.learnings/DADJOKE-AUTO.log",
+    "level": "INFO"
+  }
+}

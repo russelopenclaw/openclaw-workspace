@@ -1,0 +1,6 @@
+{
+  "command": "cd /home/kevin/.openclaw/workspace && node tools/kanban-review.js",
+  "schedule": "0 * * * *",
+  "description": "Hourly Kanban board review: identify blocked, reassign work, resume execution",
+  "enabled": true
+}

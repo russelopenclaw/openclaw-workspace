@@ -37,9 +37,12 @@ Memory makes you smarter across sessions — you remember Kevin's preferences, p
 - Always spawn with `thinking: "off"` (you see their results, not their reasoning)
 - Match model to task (see docs/AGENT-MODEL-ARCHITECTURE.md):
   - Code: `qwen3-coder-next:cloud`
+  - Code (alt/cheap): `deepseek-v4-flash:cloud` (91.6% LiveCodeBench, 1M context)
   - Tools: `minimax-m2.7:cloud`
   - General: `gemma4:31b-cloud`
   - Reasoning Heavy: `nemotron-3-super:cloud`
+  - Long Context: `deepseek-v4-flash:cloud` (1M tokens, 78.7% MRCR)
+  - Deep Reasoning: `deepseek-v4-pro:cloud` (reasoning-capable, 256K context)
 
 **Your job:** Think deeply, delegate execution, deliver clean results.
 

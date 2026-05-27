@@ -1,0 +1,160 @@
+{
+  "active": [
+    {
+      "runId": "bf7296eb-bdff-4f1a-84f3-0c2dd25a95f7",
+      "label": "Jeeves - Dad Joke #21 Production with Timing",
+      "task": "Task #31: Generate Dad Joke #21 with performance timing",
+      "status": "running",
+      "startedAt": "2026-03-05T07:35:00-06:00",
+      "lastUpdated": "2026-03-05T13:35:00.000Z",
+      "totalTokens": 0,
+      "runtime": "0m"
+    }
+  ],
+  "recent": [
+    {
+      "runId": "mock-1772600098582",
+      "label": "Alfred - E2E Testing (task-28)",
+      "task": "Second Brain - E2E testing (task-28): Test all commands work correctly",
+      "status": "done",
+      "runtime": "~2h",
+      "totalTokens": 0,
+      "startedAt": "2026-03-04T04:54:58-06:00",
+      "completedAt": "2026-03-04T06:42:00-06:00",
+      "note": "Task-28 and parent task-8 marked done by heartbeat - all Second Brain features complete"
+    },
+    {
+      "runId": "927e65e4-190c-49c3-b45b-fd25fac0e997",
+      "label": "Jeeves - Recurring Events (Retry #2)",
+      "task": "Second Brain - Recurring events (task-25): Test & fix existing recurrence implementation",
+      "status": "done",
+      "runtime": "330m",
+      "totalTokens": 0,
+      "startedAt": "2026-03-03T23:12:00-06:00",
+      "completedAt": "2026-03-04T04:42:00-06:00",
+      "note": "Task-25 marked done in tasks.json - subagent status synced by heartbeat"
+    },
+    {
+      "runId": "8c12ee2f-de9f-48d3-b7a3-bd2b4cc84ac5",
+      "label": "Jeeves - Recurring Events",
+      "task": "Second Brain - Recurring events (task-25): Implement recurrence patterns",
+      "status": "killed",
+      "runtime": "72m",
+      "totalTokens": 0,
+      "startedAt": "2026-03-03T22:00:00-06:00",
+      "completedAt": "2026-03-03T23:12:00-06:00",
+      "killReason": "Exceeded 1-hour threshold - retry #2 spawned with focused scope"
+    },
+    {
+      "runId": "22117d4b-b8fb-4707-b785-0792cad2e7c1",
+      "label": "Alfred - E2E Testing",
+      "task": "Second Brain - E2E testing (task-28): Final comprehensive test",
+      "status": "done",
+      "runtime": "9m",
+      "totalTokens": 1400000,
+      "startedAt": "2026-03-03T22:51:00-06:00",
+      "completedAt": "2026-03-03T23:00:00-06:00"
+    },
+    {
+      "runId": "68dd835e-3764-441d-a47a-b1d2a7489f2a",
+      "label": "Alfred - Heartbeat Monitoring",
+      "task": "Second Brain - Heartbeat monitoring (task-27): Add reminder checks to heartbeat",
+      "status": "done",
+      "runtime": "8m",
+      "totalTokens": 1100000,
+      "startedAt": "2026-03-03T22:51:00-06:00",
+      "completedAt": "2026-03-03T22:59:00-06:00"
+    },
+    {
+      "runId": "be0bc7fc-1884-422a-a82a-044ef03fa247",
+      "label": "Alfred - E2E Testing",
+      "task": "Second Brain - E2E Testing (task-28): Test all commands end-to-end",
+      "status": "done",
+      "runtime": "1m",
+      "totalTokens": 41800,
+      "startedAt": "2026-03-03T22:00:00-06:00",
+      "completedAt": "2026-03-03T22:02:00-06:00"
+    },
+    {
+      "runId": "f0539545-4f0b-4b5d-a4be-68df708101d1",
+      "label": "Alfred - Event Handler (Retry)",
+      "task": "Second Brain - Event Handler (task-24): Handle 'Create event [details]' - RETRY #1",
+      "status": "done",
+      "runtime": "4m",
+      "totalTokens": 488400,
+      "startedAt": "2026-03-03T21:32:00-06:00",
+      "completedAt": "2026-03-03T21:36:00-06:00"
+    },
+    {
+      "runId": "b876c551-5d3d-44b2-a729-91ea29ce21d2",
+      "label": "Jeeves - Calendar Integration",
+      "task": "Second Brain - Calendar integration (task-26): Verify Brain ↔ Calendar",
+      "status": "done",
+      "runtime": "7m",
+      "totalTokens": 978200,
+      "startedAt": "2026-03-03T21:28:00-06:00",
+      "completedAt": "2026-03-03T21:36:00-06:00"
+    },
+    {
+      "runId": "95b6067a-a33f-49c6-9a1d-1bd859860b50",
+      "label": "Alfred - Event Handler",
+      "task": "Second Brain - Event Handler (task-24): Handle 'Create event [details]'",
+      "status": "failed",
+      "runtime": "2m",
+      "totalTokens": 64100,
+      "startedAt": "2026-03-03T21:28:00-06:00",
+      "completedAt": "2026-03-03T21:31:00-06:00",
+      "failureReason": "HTTP 400 - bad request (missing file context)"
+    },
+    {
+      "runId": "0a480da6-f134-4ef0-b2d6-8b8bb3812602",
+      "label": "Alfred - Reminder Handler",
+      "task": "Second Brain - Reminder Handler (task-23): Handle 'Remind me to [task] [when]'",
+      "status": "done",
+      "runtime": "16m",
+      "totalTokens": 54062,
+      "startedAt": "2026-03-03T20:38:00-06:00",
+      "completedAt": "2026-03-03T20:55:00-06:00"
+    },
+    {
+      "runId": "23e53216-1dd6-447e-8baa-62e35620c9ca",
+      "label": "Alfred - Remember Handler",
+      "task": "Second Brain - Remember Command Handler (task-21): Handle 'Remember: [URL/content]'",
+      "status": "done",
+      "runtime": "5m",
+      "totalTokens": 34049,
+      "startedAt": "2026-03-03T20:38:00-06:00",
+      "completedAt": "2026-03-03T20:52:00-06:00"
+    },
+    {
+      "runId": "758355c6-e9f6-42f1-a28b-dfeaff7ef13d",
+      "label": "Jeeves - Keyword Extraction",
+      "task": "Second Brain - Keyword Extraction (task-19): Auto-extract 3-5 keywords",
+      "status": "done",
+      "runtime": "14m",
+      "totalTokens": 54253,
+      "startedAt": "2026-03-03T20:38:00-06:00",
+      "completedAt": "2026-03-03T20:52:00-06:00"
+    },
+    {
+      "runId": "4b0cd167-d22a-4f76-acaf-acd69ce96d4e",
+      "label": "Jeeves - Brain API Endpoints",
+      "task": "Create Brain CRUD and search APIs for Brain items",
+      "status": "done",
+      "runtime": "8m",
+      "totalTokens": 28025,
+      "startedAt": "2026-03-03T20:14:00-06:00",
+      "completedAt": "2026-03-03T20:28:00-06:00"
+    },
+    {
+      "runId": "9ef07328-2fcb-404f-9ab9-40f0333b8415",
+      "label": "Jeeves - Brain Page UI",
+      "task": "Building /brain page with saved items list, search, and keyword extraction",
+      "status": "done",
+      "runtime": "9m",
+      "totalTokens": 45773,
+      "startedAt": "2026-03-03T19:14:00-06:00",
+      "completedAt": "2026-03-03T19:24:00-06:00"
+    }
+  ]
+}

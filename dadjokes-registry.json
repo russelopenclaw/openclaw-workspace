@@ -1,0 +1,39 @@
+{
+  "jokes": {
+    "29": {
+      "youtubeId": "THVagYvkdQo",
+      "youtubeUrl": "https://www.youtube.com/watch?v=THVagYvkdQo",
+      "youtubePrivacy": "private",
+      "version": 1,
+      "uploadedAt": "2026-03-16T16:29:00Z",
+      "jokeText": "I have a joke about construction, but I'm still working on it."
+    },
+    "32": {
+      "youtubeId": "IcALTGjc8lM",
+      "youtubeUrl": "https://www.youtube.com/watch?v=IcALTGjc8lM",
+      "youtubePrivacy": "private",
+      "version": 1,
+      "uploadedAt": "2026-03-21T20:51:06.945Z",
+      "jokeText": "If money doesn’t grow on trees, then why do banks have branches?",
+      "updatedAt": "2026-03-21T20:51:06.946Z"
+    },
+    "33": {
+      "youtubeId": "8f3sf_yVV9o",
+      "youtubeUrl": "https://www.youtube.com/watch?v=8f3sf_yVV9o",
+      "youtubePrivacy": "private",
+      "version": 1,
+      "uploadedAt": "2026-03-21T20:59:16.102Z",
+      "jokeText": "To the person who stole my depression medication: I hope you're happy now.",
+      "updatedAt": "2026-03-21T20:59:16.102Z"
+    },
+    "34": {
+      "youtubeId": "wXvPxx-Lg3w",
+      "youtubeUrl": "https://www.youtube.com/watch?v=wXvPxx-Lg3w",
+      "youtubePrivacy": "private",
+      "version": 1,
+      "uploadedAt": "2026-03-21T21:05:08.118Z",
+      "jokeText": "What's brown and sticky? A stick.",
+      "updatedAt": "2026-03-21T21:05:08.118Z"
+    }
+  }
+}

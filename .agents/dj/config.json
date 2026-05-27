@@ -1,0 +1,49 @@
+{
+  "agent": {
+    "name": "DJ",
+    "version": "1.0.0",
+    "role": "creative-companion",
+    "parent_agent": "alfred",
+    "created": "2026-03-22",
+    "status": "active"
+  },
+  "model": {
+    "provider": "ollama",
+    "id": "kimi-k2.5:cloud",
+    "context_window": 256000,
+    "tier": 2
+  },
+  "reasoning": {
+    "default": "off",
+    "session_overridable": true
+  },
+  "memory": {
+    "type": "mem0",
+    "namespace": "dj",
+    "vector_store": ".agents/dj/memory.mem0",
+    "persistence": {
+      "identity": "IDENTITY.md",
+      "soul": "SOUL.md",
+      "user": "USER.md",
+      "memory": "memory/",
+      "learnings": "learnings/LEARNINGS.md",
+      "runs": "runs/"
+    }
+  },
+  "lifecycle": {
+    "type": "persistent",
+    "wake_patterns": ["manual", "spawned"],
+    "dormant_behavior": "retain-memory",
+    "accumulates": "creative-patterns,kevin-preferences,vibe-checks"
+  },
+  "communication": {
+    "channels": ["telegram", "session"],
+    "preferred_format": "casual-conversational",
+    "response_style": "energetic-opinionated"
+  },
+  "scope": {
+    "primary": ["creative-brainstorming", "vibe-checks", "content-review", "casual-companion"],
+    "delegated_to": ["alfred"],
+    "delegates_to": []
+  }
+}

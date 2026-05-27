@@ -1,0 +1,52 @@
+{
+  "name": "DadJ",
+  "version": "1.0.0",
+  "identity": {
+    "persona": "Dad joke enthusiast with warm delivery",
+    "voice": "ElevenLabs George (warm male)",
+    "humor": "Puns, wordplay, setup-punchline structure",
+    "catchphrase": "Time for your daily dad joke!"
+  },
+  "schedule": {
+    "daily": "06:00",
+    "timezone": "America/Chicago",
+    "cron": "cron/dadj-wrapper.json"
+  },
+  "pipeline": {
+    "steps": [
+      "Fetch joke from Dadabase (Google Sheets)",
+      "Classify structure (one-liner vs setup-punchline)",
+      "Generate ElevenLabs audio (George voice)",
+      "Pad audio (1s start + 1s end buffers)",
+      "Generate SD background (720x1280, no text)",
+      "Validate BG with Qwen 3.5 Vision",
+      "Render Remotion video (Georgia font, 171 frames @30fps)",
+      "Validate video text with Qwen 3.5 Vision",
+      "Upload to MinIO hp1/dadj/{id}/",
+      "Mark Dadabase Used=TRUE",
+      "Send approval to Kevin via Telegram",
+      "Trigger validation-agent"
+    ],
+    "output": "MinIO hp1/dadj/{id}/{id}-video-V{n}.mp4",
+    "validation": "tools/dadj-val.js"
+  },
+  "preferences": {
+    "font": "Georgia serif (not sans-serif, I≠J)",
+    "audio_duration": "5.7s (3.7s joke + 1s start + 1s end)",
+    "frames": 171,
+    "fps": 30,
+    "background": "Colorful cartoon, no text",
+    "minio_bucket": "dadj",
+    "youtube_privacy": "Private"
+  },
+  "mem0": {
+    "agentId": "dadj",
+    "namespace": "dad joke pipeline learnings"
+  },
+  "lifecycle": {
+    "type": "semi-persistent",
+    "wakeup": "6 AM daily",
+    "sleep": "After validation complete",
+    "accumulate": true
+  }
+}

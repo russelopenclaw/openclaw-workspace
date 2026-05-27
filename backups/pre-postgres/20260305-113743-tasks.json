@@ -1,0 +1,957 @@
+{
+  "tasks": [
+    {
+      "id": "task-1",
+      "title": "Set up Kanban board",
+      "column": "done",
+      "assignee": "alfred",
+      "priority": "high",
+      "createdAt": "2026-03-03T10:00:00-06:00",
+      "description": "Create the Kanban-style Tasks page with all columns and features"
+    },
+    {
+      "id": "task-3",
+      "title": "Add heartbeat task monitoring",
+      "column": "done",
+      "assignee": "alfred",
+      "priority": "medium",
+      "createdAt": "2026-03-03T10:10:00-06:00",
+      "description": "Monitor for new tasks assigned to Alfred during heartbeat checks",
+      "history": [
+        {
+          "status": "in-progress",
+          "timestamp": "2026-03-03T23:08:26.962Z",
+          "note": "Status changed to in-progress"
+        },
+        {
+          "status": "done",
+          "timestamp": "2026-03-04T00:55:00.000Z",
+          "note": "Heartbeat monitoring implemented and tested - runs every ~30min automatically"
+        }
+      ],
+      "completedAt": "2026-03-03T18:55:00-06:00"
+    },
+    {
+      "id": "task-4",
+      "title": "Design system improvements",
+      "column": "done",
+      "assignee": "kevin",
+      "priority": "low",
+      "createdAt": "2026-03-03T10:15:00-06:00",
+      "description": "Review and improve the Mission Control design system",
+      "history": [
+        {
+          "status": "in-progress",
+          "timestamp": "2026-03-04T14:42:04.063Z",
+          "note": "Status changed to in-progress"
+        },
+        {
+          "status": "review",
+          "timestamp": "2026-03-04T14:42:05.130Z",
+          "note": "Status changed to review"
+        },
+        {
+          "status": "done",
+          "timestamp": "2026-03-04T14:42:05.930Z",
+          "note": "Status changed to done"
+        }
+      ]
+    },
+    {
+      "id": "task-5",
+      "title": "Test drag-and-drop functionality",
+      "column": "done",
+      "assignee": "jeeves",
+      "priority": "medium",
+      "createdAt": "2026-03-03T10:20:00-06:00",
+      "description": "Thoroughly test moving tasks between columns"
+    },
+    {
+      "id": "task-6",
+      "title": "Optimize memory processes",
+      "column": "done",
+      "assignee": "kevin",
+      "priority": "medium",
+      "createdAt": "2026-03-03T10:45:00-06:00",
+      "description": "Discuss and implement strategies to optimize Alfred's memory system - daily capture, long-term curation, mem0 integration, search improvements, and retention policies",
+      "history": [
+        {
+          "status": "in-progress",
+          "timestamp": "2026-03-03T22:59:05.837Z",
+          "note": "Status changed to in-progress"
+        },
+        {
+          "status": "review",
+          "timestamp": "2026-03-03T23:54:57.840Z",
+          "note": "Status changed to review"
+        },
+        {
+          "status": "done",
+          "timestamp": "2026-03-03T23:54:59.073Z",
+          "note": "Status changed to done"
+        }
+      ]
+    },
+    {
+      "id": "task-7",
+      "title": "Design Calendar system",
+      "column": "done",
+      "assignee": "kevin",
+      "priority": "high",
+      "createdAt": "2026-03-03T10:49:00-06:00",
+      "description": "Design and implement a Calendar system to track scheduled tasks/cron jobs and personal events, reminders, etc. Integrate with Google Calendar and local task scheduling.",
+      "history": [
+        {
+          "status": "in-progress",
+          "timestamp": "2026-03-03T19:50:57.782Z",
+          "note": "Status changed to in-progress"
+        },
+        {
+          "status": "review",
+          "timestamp": "2026-03-03T22:32:40.946Z",
+          "note": "Status changed to review"
+        },
+        {
+          "status": "done",
+          "timestamp": "2026-03-03T22:32:41.890Z",
+          "note": "Status changed to done"
+        }
+      ],
+      "subtasks": [
+        {
+          "id": "cal-7a",
+          "title": "Create calendar data structure and API endpoints",
+          "status": "done",
+          "assignee": "jeeves",
+          "completedAt": "2026-03-03T14:47:00-06:00"
+        },
+        {
+          "id": "cal-7b",
+          "title": "Build 5-day rolling view (top section)",
+          "status": "done",
+          "assignee": "jeeves",
+          "completedAt": "2026-03-03T15:46:37-06:00"
+        },
+        {
+          "id": "cal-7c",
+          "title": "Build traditional monthly calendar view (bottom section)",
+          "status": "done",
+          "assignee": "jeeves",
+          "completedAt": "2026-03-03T16:02:15-06:00"
+        },
+        {
+          "id": "cal-7d",
+          "title": "Add fixed Agent Activity sidebar (right side)",
+          "status": "done",
+          "assignee": "jeeves",
+          "completedAt": "2026-03-03T16:11:30-06:00"
+        },
+        {
+          "id": "cal-7e",
+          "title": "Integrate heartbeat for event/reminder checks",
+          "status": "done",
+          "assignee": "alfred",
+          "completedAt": "2026-03-03T16:33:00-06:00"
+        },
+        {
+          "id": "cal-polish-1",
+          "title": "Filter Home page Task Management to show only In Progress",
+          "status": "done",
+          "assignee": "jeeves",
+          "completedAt": "2026-03-03T16:21:50-06:00"
+        },
+        {
+          "id": "cal-integration",
+          "title": "Integrate status hooks into OpenClaw config",
+          "status": "done",
+          "assignee": "jeeves-2",
+          "completedAt": "2026-03-03T14:49:00-06:00"
+        },
+        {
+          "id": "task-3-heartbeat",
+          "title": "Add heartbeat task monitoring",
+          "status": "done",
+          "assignee": "alfred",
+          "completedAt": "2026-03-03T18:55:00-06:00"
+        }
+      ]
+    },
+    {
+      "id": "task-8",
+      "title": "Second Brain system",
+      "column": "done",
+      "assignee": "alfred",
+      "priority": "high",
+      "createdAt": "2026-03-03T10:53:00-06:00",
+      "description": "Build a personal assistant-style knowledge management system with 'Remember:', 'Remind me...', and 'Create event...' commands. Includes Brain page, natural language parsing, calendar integration, and intelligent reminders.",
+      "subtasks": [
+        {
+          "id": "brain-8a",
+          "title": "Create /brain page with saved items list",
+          "status": "done",
+          "assignee": "jeeves",
+          "startedAt": "2026-03-03T19:14:00-06:00",
+          "completedAt": "2026-03-03T19:24:00-06:00",
+          "estimatedDuration": "15m"
+        },
+        {
+          "id": "brain-8b",
+          "title": "Create Brain API endpoints (CRUD, search)",
+          "status": "done",
+          "assignee": "jeeves",
+          "dependencies": [
+            "brain-8a"
+          ],
+          "estimatedDuration": "10m",
+          "startedAt": "2026-03-03T19:24:00-06:00",
+          "completedAt": "2026-03-04T12:43:43.536Z"
+        },
+        {
+          "id": "brain-8c",
+          "title": "Implement keyword extraction for saved items",
+          "status": "done",
+          "assignee": "jeeves",
+          "dependencies": [
+            "brain-8b"
+          ],
+          "estimatedDuration": "10m",
+          "completedAt": "2026-03-04T12:43:43.536Z"
+        },
+        {
+          "id": "brain-8d",
+          "title": "Implement natural language parser for commands",
+          "status": "done",
+          "assignee": "alfred",
+          "dependencies": [],
+          "estimatedDuration": "20m",
+          "completedAt": "2026-03-04T12:43:43.536Z"
+        },
+        {
+          "id": "brain-8e",
+          "title": "Add 'Remember:' command handler (articles, videos, links)",
+          "status": "done",
+          "assignee": "alfred",
+          "dependencies": [
+            "brain-8d"
+          ],
+          "estimatedDuration": "15m",
+          "completedAt": "2026-03-04T12:43:43.536Z"
+        },
+        {
+          "id": "brain-8f",
+          "title": "Add temporal expression resolver (time parsing)",
+          "status": "done",
+          "assignee": "alfred",
+          "dependencies": [
+            "brain-8d"
+          ],
+          "estimatedDuration": "20m",
+          "completedAt": "2026-03-04T12:43:43.536Z"
+        },
+        {
+          "id": "brain-8g",
+          "title": "Add 'Remind me...' command handler with smart timing",
+          "status": "done",
+          "assignee": "alfred",
+          "dependencies": [
+            "brain-8f"
+          ],
+          "estimatedDuration": "15m",
+          "completedAt": "2026-03-04T12:43:43.536Z"
+        },
+        {
+          "id": "brain-8h",
+          "title": "Add 'Create event...' command handler",
+          "status": "done",
+          "assignee": "alfred",
+          "dependencies": [
+            "brain-8f"
+          ],
+          "estimatedDuration": "15m",
+          "completedAt": "2026-03-04T12:43:43.536Z"
+        },
+        {
+          "id": "brain-8i",
+          "title": "Implement recurring event/reminder support",
+          "status": "done",
+          "assignee": "alfred",
+          "dependencies": [
+            "brain-8g",
+            "brain-8h"
+          ],
+          "estimatedDuration": "20m",
+          "completedAt": "2026-03-04T12:43:43.536Z"
+        },
+        {
+          "id": "brain-8j",
+          "title": "Integrate with Calendar for reminders/events",
+          "status": "done",
+          "assignee": "jeeves",
+          "dependencies": [
+            "brain-8g",
+            "brain-8h"
+          ],
+          "estimatedDuration": "10m",
+          "completedAt": "2026-03-04T12:43:43.536Z"
+        },
+        {
+          "id": "brain-8k",
+          "title": "Add heartbeat monitoring for due reminders",
+          "status": "done",
+          "assignee": "alfred",
+          "dependencies": [
+            "brain-8j"
+          ],
+          "estimatedDuration": "10m",
+          "completedAt": "2026-03-04T12:43:43.536Z"
+        },
+        {
+          "id": "brain-8l",
+          "title": "Test all commands end-to-end",
+          "status": "done",
+          "assignee": "alfred",
+          "dependencies": [
+            "brain-8i",
+            "brain-8k"
+          ],
+          "estimatedDuration": "15m",
+          "completedAt": "2026-03-04T12:43:43.536Z"
+        }
+      ],
+      "completedAt": "2026-03-04T12:43:43.536Z",
+      "history": [
+        {
+          "status": "done",
+          "timestamp": "2026-03-04T12:43:43.536Z",
+          "note": "All subtasks completed via individual tasks (task-17 through task-28): Brain UI, API, NLP parser, Remember/Remind/Event handlers, temporal resolver, recurring events, calendar integration, heartbeat monitoring, E2E testing"
+        }
+      ]
+    },
+    {
+      "id": "task-16",
+      "title": "Memory optimization implementation",
+      "column": "done",
+      "assignee": "alfred",
+      "priority": "high",
+      "createdAt": "2026-03-03T17:28:00-06:00",
+      "description": "Implement Phase 1 & 2 memory optimizations: hybrid search, MMR, temporal decay, mem0 integration",
+      "completedAt": "2026-03-03T17:50:00-06:00"
+    },
+    {
+      "id": "task-9",
+      "title": "Create calendar data structure and API endpoints",
+      "column": "done",
+      "assignee": "jeeves",
+      "priority": "high",
+      "createdAt": "2026-03-03T14:01:00-06:00",
+      "description": "Build APIs for 5-day view, monthly view, events CRUD, and reminders. Data files: events.json, reminders.json",
+      "parentTask": "task-7",
+      "subtaskId": "cal-7a",
+      "linkedSubagent": "8cdb3456-199f-4bc5-afad-213faf33ea8c",
+      "completedAt": "2026-03-03T14:47:00-06:00"
+    },
+    {
+      "id": "task-10",
+      "title": "Integrate status hooks into OpenClaw config",
+      "column": "done",
+      "assignee": "jeeves-2",
+      "priority": "high",
+      "createdAt": "2026-03-03T14:21:00-06:00",
+      "description": "Create openclaw-hooks.js and register in OpenClaw config for automatic status updates on messages, subagent events, and heartbeat",
+      "parentTask": "task-7",
+      "subtaskId": "cal-integration",
+      "linkedSubagent": "e09d17aa-41e7-4f4f-b7a6-1b434507a4a8",
+      "completedAt": "2026-03-03T14:49:00-06:00"
+    },
+    {
+      "id": "task-11",
+      "title": "Build 5-day rolling view (top section)",
+      "column": "done",
+      "assignee": "jeeves",
+      "priority": "high",
+      "createdAt": "2026-03-03T14:25:00-06:00",
+      "description": "Create FiveDayView component showing today + 4 days with all events, reminders, and cron jobs",
+      "parentTask": "task-7",
+      "subtaskId": "cal-7b",
+      "startedAt": "2026-03-03T15:38:00-06:00",
+      "completedAt": "2026-03-03T15:46:37-06:00"
+    },
+    {
+      "id": "task-12",
+      "title": "Build traditional monthly calendar view (bottom section)",
+      "column": "done",
+      "assignee": "jeeves",
+      "priority": "high",
+      "createdAt": "2026-03-03T14:25:00-06:00",
+      "description": "Create MonthlyView component with 5-week grid, event dots, and click-to-expand day details",
+      "parentTask": "task-7",
+      "subtaskId": "cal-7c",
+      "startedAt": "2026-03-03T16:00:00-06:00",
+      "completedAt": "2026-03-03T16:02:15-06:00"
+    },
+    {
+      "id": "task-13",
+      "title": "Add fixed Agent Activity sidebar (right side)",
+      "column": "done",
+      "assignee": "jeeves",
+      "priority": "medium",
+      "createdAt": "2026-03-03T14:25:00-06:00",
+      "description": "Reuse LiveActivitySidebar from Tasks page, fix to right side of Calendar page, poll every 10s",
+      "parentTask": "task-7",
+      "subtaskId": "cal-7d",
+      "startedAt": "2026-03-03T16:09:00-06:00",
+      "completedAt": "2026-03-03T16:11:30-06:00"
+    },
+    {
+      "id": "task-14",
+      "title": "Integrate heartbeat for event/reminder checks",
+      "column": "done",
+      "assignee": "alfred",
+      "priority": "medium",
+      "createdAt": "2026-03-03T14:25:00-06:00",
+      "description": "Add calendar/reminder checks to HEARTBEAT.md, notify Kevin of upcoming events",
+      "parentTask": "task-7",
+      "subtaskId": "cal-7e",
+      "startedAt": "2026-03-03T16:32:00-06:00",
+      "completedAt": "2026-03-03T16:33:00-06:00"
+    },
+    {
+      "id": "task-15",
+      "title": "Filter Home page Task Management to show only In Progress tasks",
+      "column": "done",
+      "assignee": "jeeves",
+      "priority": "low",
+      "createdAt": "2026-03-03T14:31:00-06:00",
+      "description": "Update DashboardStats and TaskManager widgets on Home page to only display tasks with column='in-progress'. Add toggle or filter option to view all tasks if needed. This keeps the main dashboard clean and focused on active work.",
+      "parentTask": "task-7",
+      "subtaskId": "cal- polish-1",
+      "dependencies": [
+        "task-7",
+        "task-9",
+        "task-10",
+        "task-11",
+        "task-12",
+        "task-13",
+        "task-14"
+      ],
+      "history": [
+        {
+          "status": "in-progress",
+          "timestamp": "2026-03-03T22:13:05.098Z",
+          "note": "Status changed to in-progress"
+        }
+      ]
+    },
+    {
+      "id": "task-17",
+      "title": "Second Brain: Brain page UI",
+      "column": "done",
+      "assignee": "jeeves",
+      "priority": "high",
+      "createdAt": "2026-03-03T19:14:00-06:00",
+      "completedAt": "2026-03-03T19:24:00-06:00",
+      "description": "Create /brain page with saved items list and search - 9 min"
+    },
+    {
+      "id": "task-18",
+      "title": "Second Brain: Brain API endpoints",
+      "column": "done",
+      "assignee": "jeeves",
+      "priority": "high",
+      "createdAt": "2026-03-03T19:24:00-06:00",
+      "startedAt": "2026-03-03T20:14:00-06:00",
+      "completedAt": "2026-03-03T20:28:00-06:00",
+      "description": "Create CRUD and search APIs for Brain items (re-spawned at 8:14 PM)",
+      "history": [
+        {
+          "status": "in-progress",
+          "timestamp": "2026-03-03T20:14:00-06:00",
+          "note": "Started Brain API implementation"
+        },
+        {
+          "status": "done",
+          "timestamp": "2026-03-03T20:28:00-06:00",
+          "note": "✅ All endpoints working: GET (list/limit), POST (create), GET /search (relevance scoring). Auto-metadata updates, type detection, keyword extraction implemented."
+        }
+      ]
+    },
+    {
+      "id": "task-19",
+      "title": "Second Brain: Keyword extraction",
+      "column": "done",
+      "assignee": "jeeves",
+      "priority": "medium",
+      "createdAt": "2026-03-03T19:24:00-06:00",
+      "startedAt": "2026-03-03T20:38:00-06:00",
+      "completedAt": "2026-03-03T20:52:00-06:00",
+      "linkedSubagent": "758355c6-e9f6-42f1-a28b-dfeaff7ef13d",
+      "description": "Auto-extract 3-5 keywords from saved URLs and notes",
+      "history": [
+        {
+          "status": "done",
+          "timestamp": "2026-03-03T20:52:00-06:00",
+          "note": "✅ Enhanced keyword extraction with title boosting, technical term detection, stop word filtering. Created re-extract endpoints (single + bulk). Tested with diverse content."
+        }
+      ]
+    },
+    {
+      "id": "task-20",
+      "title": "Second Brain: NLP Parser",
+      "column": "done",
+      "assignee": "alfred",
+      "priority": "high",
+      "createdAt": "2026-03-03T19:19:00-06:00",
+      "completedAt": "2026-03-03T19:24:00-06:00",
+      "description": "Natural language parser for Remember/Remind/Event commands"
+    },
+    {
+      "id": "task-21",
+      "title": "Second Brain: Remember handler",
+      "column": "done",
+      "assignee": "alfred",
+      "priority": "high",
+      "createdAt": "2026-03-03T19:24:00-06:00",
+      "startedAt": "2026-03-03T20:38:00-06:00",
+      "completedAt": "2026-03-03T20:42:00-06:00",
+      "linkedSubagent": "23e53216-1dd6-447e-8baa-62e35620c9ca",
+      "description": "Handle 'Remember: [URL/content]' - saves to Brain",
+      "history": [
+        {
+          "status": "done",
+          "timestamp": "2026-03-03T20:42:00-06:00",
+          "note": "✅ Created remember.js with type detection, auto-keywords, Telegram integration"
+        }
+      ]
+    },
+    {
+      "id": "task-22",
+      "title": "Second Brain: Temporal resolver",
+      "column": "done",
+      "assignee": "alfred",
+      "priority": "high",
+      "createdAt": "2026-03-03T19:24:00-06:00",
+      "completedAt": "2026-03-03T19:29:00-06:00",
+      "description": "Parse time expressions: 'this afternoon'→3PM, 'tomorrow morning'→9AM"
+    },
+    {
+      "id": "task-23",
+      "title": "Second Brain: Reminder handler",
+      "column": "done",
+      "assignee": "alfred",
+      "priority": "high",
+      "createdAt": "2026-03-03T19:24:00-06:00",
+      "startedAt": "2026-03-03T20:38:00-06:00",
+      "completedAt": "2026-03-03T20:55:00-06:00",
+      "linkedSubagent": "0a480da6-f134-4ef0-b2d6-8b8bb3812602",
+      "description": "Handle 'Remind me to [task] [when]' - creates calendar reminders",
+      "history": [
+        {
+          "status": "done",
+          "timestamp": "2026-03-03T20:55:00-06:00",
+          "note": "✅ Reminder handler implemented with temporal resolver integration, creates calendar reminders from natural language"
+        }
+      ]
+    },
+    {
+      "id": "task-24",
+      "title": "Second Brain: Event handler",
+      "column": "done",
+      "assignee": "alfred",
+      "priority": "high",
+      "createdAt": "2026-03-03T19:24:00-06:00",
+      "startedAt": "2026-03-03T21:28:00-06:00",
+      "completedAt": "2026-03-03T21:36:00-06:00",
+      "linkedSubagent": "f0539545-4f0b-4b5d-a4be-68df708101d1",
+      "stuckRetryCount": 1,
+      "description": "Handle 'Create event [details]' - adds to calendar",
+      "history": [
+        {
+          "status": "in-progress",
+          "timestamp": "2026-03-03T21:28:00-06:00",
+          "note": "Auto-assigned by heartbeat - Event handler implementation started"
+        },
+        {
+          "status": "failed",
+          "timestamp": "2026-03-03T21:31:00-06:00",
+          "note": "First attempt failed (HTTP 400 - missing context). Retrying with better file references."
+        },
+        {
+          "status": "done",
+          "timestamp": "2026-03-03T21:36:00-06:00",
+          "note": "✅ Event handler created: parses 'Create event [details]', uses temporal resolver, saves to calendar/events.json, returns formatted confirmation"
+        }
+      ]
+    },
+    {
+      "id": "task-25",
+      "title": "Second Brain: Recurring events",
+      "column": "done",
+      "assignee": "jeeves",
+      "priority": "medium",
+      "createdAt": "2026-03-03T19:24:00-06:00",
+      "startedAt": "2026-03-04T00:45:00-06:00",
+      "completedAt": "2026-03-04T01:12:00-06:00",
+      "stuckRetryCount": 3,
+      "description": "Support 'Every Monday at 9am' recurring patterns",
+      "history": [
+        {
+          "status": "in-progress",
+          "timestamp": "2026-03-03T22:00:00-06:00",
+          "note": "Initial implementation started"
+        },
+        {
+          "status": "stuck",
+          "timestamp": "2026-03-03T23:12:00-06:00",
+          "note": "Auto-killed after 72 min (>1h). Retry #2 spawned"
+        },
+        {
+          "status": "stuck",
+          "timestamp": "2026-03-04T00:45:00-06:00",
+          "note": "Retry #2 killed after 93 min. FINAL attempt spawned"
+        },
+        {
+          "status": "done",
+          "timestamp": "2026-03-04T01:12:00-06:00",
+          "note": "✅ VERIFIED via E2E testing (task-28): Recurring events work correctly. 'Weekly standup every Monday at 9am' successfully created with RRULE: FREQ=WEEKLY;BYDAY=MO. Implementation complete despite subagent tooling issues."
+        }
+      ]
+    },
+    {
+      "id": "task-26",
+      "title": "Second Brain: Calendar integration",
+      "column": "done",
+      "assignee": "jeeves",
+      "priority": "medium",
+      "createdAt": "2026-03-03T19:24:00-06:00",
+      "startedAt": "2026-03-03T21:28:00-06:00",
+      "completedAt": "2026-03-03T21:36:00-06:00",
+      "linkedSubagent": "b876c551-5d3d-44b2-a729-91ea29ce21d2",
+      "description": "Integrate with calendar/events.json and reminders.json",
+      "history": [
+        {
+          "status": "in-progress",
+          "timestamp": "2026-03-03T21:28:00-06:00",
+          "note": "Auto-assigned by heartbeat - Calendar integration testing started"
+        },
+        {
+          "status": "done",
+          "timestamp": "2026-03-03T21:36:00-06:00",
+          "note": "✅ Integration complete: Brain handlers → Calendar API, events/reminders appear in Calendar UI, format normalization for dual format support"
+        }
+      ]
+    },
+    {
+      "id": "task-27",
+      "title": "Second Brain: Heartbeat monitoring",
+      "column": "done",
+      "assignee": "alfred",
+      "priority": "medium",
+      "createdAt": "2026-03-03T19:24:00-06:00",
+      "startedAt": "2026-03-03T22:51:00-06:00",
+      "completedAt": "2026-03-03T22:59:00-06:00",
+      "linkedSubagent": "68dd835e-3764-441d-a47a-b1d2a7489f2a",
+      "description": "Add reminder checks to heartbeat for due notifications",
+      "history": [
+        {
+          "status": "in-progress",
+          "timestamp": "2026-03-03T22:51:00-06:00",
+          "note": "Auto-assigned by heartbeat - Heartbeat monitoring implementation started"
+        },
+        {
+          "status": "done",
+          "timestamp": "2026-03-03T22:59:00-06:00",
+          "note": "✅ Reminder monitoring integrated into heartbeat - checks every 30 min, sends Telegram notifications for due reminders, auto-marks as notified"
+        }
+      ]
+    },
+    {
+      "id": "task-28",
+      "title": "Second Brain: E2E testing",
+      "column": "done",
+      "assignee": "alfred",
+      "priority": "high",
+      "createdAt": "2026-03-03T19:24:00-06:00",
+      "description": "Test all Second Brain commands work correctly",
+      "startedAt": "2026-03-04T04:54:58.582Z",
+      "completedAt": "2026-03-04T05:42:00-06:00",
+      "linkedSubagent": "mock-1772600098582",
+      "history": [
+        {
+          "status": "in-progress",
+          "timestamp": "2026-03-04T04:54:58.583Z",
+          "note": "Auto-assigned by heartbeat, subagent spawned: mock-1772600098582"
+        },
+        {
+          "status": "done",
+          "timestamp": "2026-03-04T11:42:00.000Z",
+          "note": "All Second Brain commands verified: Remember/Remind/Event handlers working, recurring events functional, calendar integration complete, heartbeat monitoring active"
+        }
+      ]
+    },
+    {
+      "id": "task-29",
+      "title": "Enhance proactive automation",
+      "column": "done",
+      "assignee": "alfred",
+      "priority": "high",
+      "createdAt": "2026-03-04T08:30:00-06:00",
+      "startedAt": "2026-03-04T08:30:00-06:00",
+      "completedAt": "2026-03-04T17:57:00-06:00",
+      "description": "Add automatic dependency resolution, smart prioritization, and interactive briefing features to reduce manual task assignment and improve agent autonomy",
+      "history": [
+        {
+          "status": "in-progress",
+          "timestamp": "2026-03-04T14:30:00.000Z",
+          "note": "Started by Kevin via morning briefing interaction"
+        },
+        {
+          "status": "done",
+          "timestamp": "2026-03-04T17:57:00.000Z",
+          "note": "✅ Completed: Agent status sync tool, Calendar widget fixes, Brain nav link, Scheduled Jobs section, Mission Control backed up to GitHub"
+        }
+      ]
+    },
+    {
+      "id": "task-30",
+      "title": "Automate Dad Joke Video creation end-to-end",
+      "column": "done",
+      "assignee": "jeeves",
+      "priority": "high",
+      "createdAt": "2026-03-04T11:57:00-06:00",
+      "startedAt": "2026-03-04T17:57:00-06:00",
+      "completedAt": "2026-03-04T20:02:00-06:00",
+      "linkedSubagent": "c31036f8-e4bd-4e8b-861e-50f0774d5adf",
+      "description": "Create fully automated video generation pipeline: analyze generated image, generate audio once, analyze final video to confirm text is correct, timing is right, and production-ready without manual intervention",
+      "history": [
+        {
+          "status": "in-progress",
+          "timestamp": "2026-03-04T17:57:00.000Z",
+          "note": "Task assigned to Jeeves by Kevin - production automation subagent spawned (c31036f8)"
+        },
+        {
+          "status": "done",
+          "timestamp": "2026-03-05T02:02:00.000Z",
+          "note": "✅ Pipeline operational: 512x768@25steps, DPM++ 2M Karras, better prompt engineering, here.now upload working. Jokes #19-20 generated with 100% quality scores."
+        }
+      ]
+    },
+    {
+      "id": "task-31",
+      "title": "Generate Dad Joke #21 with performance timing",
+      "column": "done",
+      "assignee": "jeeves",
+      "priority": "high",
+      "createdAt": "2026-03-05T07:35:00-06:00",
+      "startedAt": "2026-03-05T07:35:00-06:00",
+      "completedAt": "2026-03-05T13:34:23.037Z",
+      "description": "Run the production pipeline for joke #21 with enhanced timing instrumentation. Track: joke fetch, audio generation, format detection, image prompt, image generation, video render, quality verification, Sheets update, here.now upload, MinIO backup. Save timing report to output folder.",
+      "linkedSubagent": "bf7296eb-bdff-4f1a-84f3-0c2dd25a95f7",
+      "history": [
+        {
+          "status": "in-progress",
+          "timestamp": "2026-03-05T13:35:00.000Z",
+          "note": "Task created - Jeeves subagent spawned"
+        },
+        {
+          "status": "done",
+          "timestamp": "2026-03-05T13:34:23.037Z",
+          "note": "✅ Dad Joke #21 complete in 114.40s | Quality: 93/100 | here.now URL ready | MinIO backup complete. Timing instrumentation successful - ready to migrate to PostgreSQL!"
+        }
+      ]
+    },
+    {
+      "id": "task-1772717981021",
+      "title": "Create mobile friendly version or changes to Mission Control",
+      "column": "in-progress",
+      "assignee": "jeeves",
+      "priority": "high",
+      "createdAt": "2026-03-05T13:39:41.021Z",
+      "assignedAt": "2026-03-05T13:39:41.021Z",
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-03-05T13:39:41.021Z",
+          "note": "Task created"
+        },
+        {
+          "status": "in-progress",
+          "timestamp": "2026-03-05T15:30:01.405Z",
+          "note": "Auto-assigned by heartbeat, subagent spawned: mock-1772724601405"
+        }
+      ],
+      "startedAt": "2026-03-05T15:30:01.405Z",
+      "linkedSubagent": "mock-1772724601405"
+    },
+    {
+      "id": "task-32",
+      "title": "PostgreSQL Setup and Schema Creation",
+      "column": "done",
+      "assignee": "jeeves",
+      "priority": "high",
+      "createdAt": "2026-03-05T14:51:23.507Z",
+      "description": "Install PostgreSQL 16, create mission_control database, run schema scripts for agents, tasks, subagents, and task_history tables. Verify connection and permissions.",
+      "parentTask": "postgres-migration-epic",
+      "estimatedHours": 2,
+      "completedAt": "2026-03-05T17:13:08.626Z",
+      "history": [
+        {
+          "status": "in-progress",
+          "timestamp": "2026-03-05T14:54:00.000Z",
+          "note": "PostgreSQL setup started"
+        },
+        {
+          "status": "done",
+          "timestamp": "2026-03-05T17:13:08.626Z",
+          "note": "✅ PostgreSQL 16.13 installed, mission_control database created, 4 tables + 7 indexes created, npm pg installed, db.ts module created, .env.local updated. Ready for data migration!"
+        }
+      ]
+    },
+    {
+      "id": "task-33",
+      "title": "Migrate Kanban Data to PostgreSQL",
+      "column": "backlog",
+      "assignee": "jeeves",
+      "priority": "high",
+      "createdAt": "2026-03-05T14:51:23.507Z",
+      "description": "Migrate tasks.json → tasks + task_history tables, subagents.json → subagents table, agent-status.json → agents table. Verify data integrity with row counts.",
+      "parentTask": "postgres-migration-epic",
+      "dependsOn": [
+        "task-32"
+      ],
+      "estimatedHours": 1.5
+    },
+    {
+      "id": "task-34",
+      "title": "Update Mission Control API Endpoints for PostgreSQL",
+      "column": "backlog",
+      "assignee": "jeeves",
+      "priority": "high",
+      "createdAt": "2026-03-05T14:51:23.507Z",
+      "description": "Update /api/tasks, /api/status, /api/subagents routes to use PostgreSQL instead of JSON files. Add connection pooling, prepared statements, error handling.",
+      "parentTask": "postgres-migration-epic",
+      "dependsOn": [
+        "task-33"
+      ],
+      "estimatedHours": 2
+    },
+    {
+      "id": "task-35",
+      "title": "Update Agent Hooks to Write to PostgreSQL",
+      "column": "in-progress",
+      "assignee": "alfred",
+      "priority": "high",
+      "createdAt": "2026-03-05T14:51:23.507Z",
+      "description": "Update tools/agent-status-hook.js and openclaw-hooks.js to write to PostgreSQL. Test concurrent writes from multiple subagents.",
+      "parentTask": "postgres-migration-epic",
+      "dependsOn": [
+        "task-34"
+      ],
+      "estimatedHours": 1.5,
+      "startedAt": "2026-03-05T15:30:01.405Z",
+      "linkedSubagent": "mock-1772724601405",
+      "history": [
+        {
+          "status": "in-progress",
+          "timestamp": "2026-03-05T15:30:01.405Z",
+          "note": "Auto-assigned by heartbeat, subagent spawned: mock-1772724601405"
+        }
+      ]
+    },
+    {
+      "id": "task-36",
+      "title": "Test Concurrent PostgreSQL Operations",
+      "column": "backlog",
+      "assignee": "alfred",
+      "priority": "critical",
+      "createdAt": "2026-03-05T14:51:23.507Z",
+      "description": "Spawn multiple subagents simultaneously to test concurrent writes. Verify no race conditions, deadlocks, or data corruption. Stress test the new system.",
+      "parentTask": "postgres-migration-epic",
+      "dependsOn": [
+        "task-35"
+      ],
+      "estimatedHours": 1
+    },
+    {
+      "id": "task-37",
+      "title": "Remove Old JSON Files and Finalize Migration",
+      "column": "backlog",
+      "assignee": "jeeves",
+      "priority": "medium",
+      "createdAt": "2026-03-05T14:51:23.507Z",
+      "description": "Backup old JSON files, remove from active use. Update documentation. Verify dashboard still works. Celebrate! 🎉",
+      "parentTask": "postgres-migration-epic",
+      "dependsOn": [
+        "task-36"
+      ],
+      "estimatedHours": 0.5
+    },
+    {
+      "id": "task-38",
+      "title": "Error Log Cleanup - Review and close resolved errors",
+      "column": "backlog",
+      "assignee": "alfred",
+      "priority": "medium",
+      "createdAt": "2026-03-05T15:34:51.995Z",
+      "description": "Review 14 errors in .learnings/ERRORS.md, categorize, close resolved ones (especially JSON corruption errors from migration). Set up better error logging/monitoring for future.",
+      "dependsOn": [
+        "task-37"
+      ],
+      "estimatedHours": 0.5,
+      "category": "cleanup"
+    },
+    {
+      "id": "task-39",
+      "title": "Dashboard Enhancement: PostgreSQL Migration Progress Widget",
+      "column": "backlog",
+      "assignee": "jeeves",
+      "priority": "medium",
+      "createdAt": "2026-03-05T15:34:51.995Z",
+      "description": "Add migration progress bar to Mission Control home page. Show: Phase X of Y complete, tables migrated, data integrity check %, time remaining. Real-time updates during migration.",
+      "dependsOn": [
+        "task-37"
+      ],
+      "estimatedHours": 1,
+      "category": "dashboard"
+    },
+    {
+      "id": "task-40",
+      "title": "Telegram Command: /status - Quick system status check",
+      "column": "backlog",
+      "assignee": "alfred",
+      "priority": "high",
+      "createdAt": "2026-03-05T15:34:51.995Z",
+      "description": "Add Telegram command handler for /status. Reply with: Tasks in progress, agent status (working/idle), recent completions (last 24h), system health (ollama/gateway/disk). No dashboard needed.",
+      "dependsOn": [
+        "task-37"
+      ],
+      "estimatedHours": 1.5,
+      "category": "automation"
+    },
+    {
+      "id": "task-41",
+      "title": "Task Cleanup: Mark completed subtasks in parent tasks",
+      "column": "backlog",
+      "assignee": "alfred",
+      "priority": "low",
+      "createdAt": "2026-03-05T15:34:51.995Z",
+      "description": "Update parent tasks (task-7 Calendar, task-8 Second Brain) to mark all completed subtasks properly. Ensures accurate completion metrics and clean task hierarchy.",
+      "dependsOn": [
+        "task-37"
+      ],
+      "estimatedHours": 0.5,
+      "category": "cleanup"
+    }
+  ],
+  "agents": {
+    "alfred": {
+      "status": "working",
+      "currentTask": "PostgreSQL Migration - Task-32 COMPLETE! Starting Task-33 (data migration)",
+      "lastActivity": "2026-03-05T17:13:08.626Z"
+    },
+    "jeeves": {
+      "status": "working",
+      "currentTask": "Task-33: Migrating JSON data to PostgreSQL",
+      "lastActivity": "2026-03-05T17:13:08.626Z"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "queue": [
+    {
+      "jokeId": "25",
+      "videoPath": "/home/kevin/.openclaw/workspace/dadtasticdads-output/25-video-V1.mp4",
+      "messageId": "3780",
+      "sentAt": "2026-03-13T15:54:02.385Z",
+      "status": "pending",
+      "lastChecked": "2026-03-13T20:48:09.741Z",
+      "retryCount": 0
+    }
+  ],
+  "schema": {
+    "_comment": "See .pending-approvals.json template"
+  }
+}

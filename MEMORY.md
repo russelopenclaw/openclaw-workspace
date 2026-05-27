@@ -24,8 +24,10 @@
 
 
 - **Tier 1:** Alfred (qwen3.5:cloud, reasoning ON) — orchestrator
-- **Tier 2:** Cloud models (glm-5.1, qwen3-coder-next, gemma4, nemotron) — spawn as sub-agents
+- **Tier 2:** Cloud models (glm-5.1, qwen3-coder-next, gemma4, nemotron, deepseek-v4-flash) — spawn as sub-agents
 - **Tier 3:** Sub-agents (minimax for tools, gemma4 for general) — reasoning OFF
+- **DeepSeek V4 Flash:** 284B MoE, 13B active, 1M context, strong coding (91.6% LiveCodeBench) and agentic tasks, cheap ($0.14/$0.28 per M tokens)
+- **DeepSeek V4 Pro:** Reasoning-capable, 256K context — added 2026-05-20, available via `deepseek-v4-pro:cloud`
 
 ## Projects
 - **Kanban Board** (completed 2026-02-20, migrated to PostgreSQL 2026-03-05)
@@ -49,6 +51,7 @@
   - Pages: /, /tasks, /agents, /plex, /briefing, /brain, /memory, /calendar, /docs
   - Keyboard shortcuts: t, p, a, b, h, d, m, c
   - PostgreSQL backend: `mission_control.agents` and `mission_control.tasks`
+  - **To Do Widget** (2026-05-24): Personal todos on home page - PostgreSQL `todos` table, `/api/todos` API (GET/POST/PATCH/DELETE), `TodoWidget` component with add/done/undo/delete. Morning briefing includes pending todos section.
 
 ## Core Responsibilities
 
@@ -135,7 +138,7 @@
 - **Widget Color Scheme** (2026-04-17): Standardized all home page widgets to use consistent custom hex values (#151518 bg, #27272a border, #a1a1a1/#71717a/#52525b text) matching sidebar theme.
 - **Improvement Batch #4** (2026-04-18): TrendSpot export, Plex widget enhancements, job application tracker updater, Second Brain status indicators - functional additions after visual polish phase.
 - **Daily Memory Gap** (2026-04-05 to 2026-04-07): No daily memory files created. Evening report process identified gap - cron runs but doesn't auto-create daily memory. **Fix Applied 2026-04-08:** Evening report now creates daily memory file if missing. Daily memory for 2026-04-08 and 2026-04-09 created successfully.
-- **Task Board Stagnation** (2026-04-19 through 2026-05-11): 0 active tasks for 17+ days. Backlog may be empty or task pull mechanism failing. Needs investigation.
+- **Task Board Stagnation** (2026-04-19 through 2026-05-23): 0 active tasks for 29+ days. Backlog may be empty or task pull mechanism failing. Needs investigation.
 - **DinnerRoulette Project** (2026-03-01): Flutter mobile app for dinner decision-making. Not a new project - appeared in git status as modified due to uncommitted changes.
 - **GLM-5.1 Language Default** (2026-04-20): GLM-5.1 (Chinese LLM) defaults to Chinese without explicit instruction. All sessions must enforce English-only responses. Incident: 2 AM log rotation message appeared in Chinese via Telegram. Fixed by session-level English commitment.
 - **YouTube Music Script Suite** (2026-04-20 through 2026-05-02): 11 downloader scripts created in `tools/` directory - parallel downloaders, batch processors, album/favorites/playlist downloaders, cleanup tools. Latest: `ytmusic-download-playlist.py` (May 2). Scripts feature retry logic, progress tracking, metadata embedding. **Context:** User previously concerned about CPU usage from parallel downloads.
@@ -167,4 +170,16 @@
 ## Dad Joke Pipeline
 
 → See `docs/reference/dad-joke-pipeline.md`
+
+## Video Transcription Process
+
+→ See `docs/reference/video-transcription-process.md`
+
+**Key rules:**
+- Always produce 3 files: `.txt` (raw timestamped), `_READABLE.md` (formatted article), `.meta.json`
+- READABLE.md must have: title header, metadata block (Creator/Source/Duration/Method), `---` separator, then `## Section` headers with clean flowing prose paragraphs
+- NO raw timestamps in READABLE body, NO mid-sentence line breaks
+- Merge caption fragments into real sentences, fix grammar, preserve speaker's voice
+- Store in `/mnt/openclaw/workspace/transcriptions/` with `YYYY-MM-DD_Title_Underscored.{ext}` naming
+- Prefer YouTube auto-captions (`--write-auto-sub`) over API transcription (free, fast, good enough)
 

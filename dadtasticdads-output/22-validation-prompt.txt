@@ -1,0 +1,10 @@
+Analyze this background image for a dad joke video:
+1. Does it have any AI artifacts (weird hands, garbled text, surreal distortions)?
+2. Is it thematically appropriate (playful, colorful, magical theme)?
+3. Is the composition clean for text overlay (no busy center area)?
+4. Rate 1-10: suitability as dad joke background
+
+Reply format:
+PASS or FAIL
+Score: X/10
+Brief explanation (2-3 sentences)

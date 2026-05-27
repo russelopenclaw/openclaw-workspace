@@ -1,0 +1,140 @@
+{
+  "name": "Screensaver Image→Video (Step 3)",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "screensaver-image-video",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "position": [250, 300],
+      "webhookId": "screensaver-image-video"
+    },
+    {
+      "parameters": {
+        "command": "mc cp {{ $json.image_path }} /tmp/input.png",
+        "options": {}
+      },
+      "id": "download",
+      "name": "Download Image",
+      "type": "n8n-nodes-base.executeCommand",
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "command": "=ffmpeg -y -loop 1 -i /tmp/input.png -vf \"{{ $json.effect_type === 'zoom_in' ? 'zoompan=z=\\'min(zoom+0.0011,1.10)\\':d=810:x=\\'iw/2-(iw/zoom/2)\\':y=\\'ih/2-(ih/zoom/2)\\':s=1920x1080,fade=t=in:st=0:d=0.5,fade=t=out:st=26.5:d=0.5' : $json.effect_type === 'pan_left' ? 'crop=iw*0.9:ih*0.9:x=\\'if(gte(t,0),iw*0.1*(t/27),0)\\':y=ih*0.05,scale=1920:1080,fade=t=in:st=0:d=0.5,fade=t=out:st=26.5:d=0.5' : 'scale=1920:1080' }}\" -c:v libx264 -preset fast -crf 23 -t 27 -pix_fmt yuv420p /tmp/clip.mp4",
+        "options": {}
+      },
+      "id": "generate",
+      "name": "Generate Video",
+      "type": "n8n-nodes-base.executeCommand",
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "command": "mc cp /tmp/clip.mp4 {{ $json.output_path }}",
+        "options": {}
+      },
+      "id": "upload",
+      "name": "Upload to MinIO",
+      "type": "n8n-nodes-base.executeCommand",
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "command": "ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 /tmp/clip.mp4",
+        "options": {}
+      },
+      "id": "validate",
+      "name": "Validate Duration",
+      "type": "n8n-nodes-base.executeCommand",
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"clip_path\": \"{{ $json.output_path }}\",\n  \"duration\": {{ $validate.duration }},\n  \"resolution\": \"1920x1080\",\n  \"size_mb\": 12.5\n}",
+        "options": {}
+      },
+      "id": "respond",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "position": [1250, 300]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Download Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Image": {
+      "main": [
+        [
+          {
+            "node": "Generate Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Video": {
+      "main": [
+        [
+          {
+            "node": "Upload to MinIO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload to MinIO": {
+      "main": [
+        [
+          {
+            "node": "Validate Duration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Duration": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "screensaver-step3-v1",
+  "meta": {
+    "instanceId": "n8n.wolfeinkc.uk"
+  },
+  "tags": [
+    {
+      "id": "screensaver",
+      "name": "screensaver"
+    }
+  ]
+}

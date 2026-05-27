@@ -1,0 +1,21 @@
+{
+  "name": "Evening Report - File Updates",
+  "schedule": {
+    "kind": "cron",
+    "expr": "0 20 * * *",
+    "tz": "America/Chicago"
+  },
+  "payload": {
+    "kind": "agentTurn",
+    "message": "Evening Report Time! Review today's work and update core files.\n\n**Process:**\n1. Read memory/$(date +%Y-%m-%d).md (today's raw log)\n2. Query PostgreSQL tasks table for completed tasks today\n3. Scan .learnings/ for new entries created today\n4. Create evening summary with:\n   - Completed tasks\n   - Key learnings\n   - MEMORY.md updates needed\n   - SOUL.md/AGENTS.md refinements\n5. Apply updates to core files (MEMORY.md, SOUL.md, AGENTS.md, OPERATING.md)\n6. Commit changes with message 'Evening report $(date +%Y-%m-%d)'\n7. Log summary to .learnings/EVENING-REPORT-$(date +%Y-%m-%d).md
+8. Send the summary to Kevin via Telegram (use message tool with channel telegram, target telegram:8177470832)\n\n**Rules:**\n- Be proactive - don't ask permission, just update\n- But validate changes won't break anything first\n- Keep MEMORY.md curated and relevant\n- Promote learnings to appropriate files\n- Archive old daily memory files if needed",
+    "model": "qwen3.5:cloud",
+    "thinking": "on",
+    "timeoutSeconds": 300
+  },
+  "sessionTarget": "isolated",
+  "enabled": true,
+  "delivery": {
+    "mode": "announce"
+  }
+}

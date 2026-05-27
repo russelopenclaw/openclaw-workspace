@@ -1,0 +1,22 @@
+{
+  "name": "Error Weekly Summary",
+  "description": "Generate weekly error log summary and send Telegram alert if >10 new errors",
+  "schedule": {
+    "kind": "cron",
+    "expr": "0 8 * * 0",
+    "tz": "America/Chicago"
+  },
+  "payload": {
+    "kind": "agentTurn",
+    "message": "IMPORTANT: Respond in English only. Generate weekly error summary and send to Telegram if needed.",
+    "model": "qwen3.5:cloud",
+    "thinking": "off",
+    "timeoutSeconds": 60
+  },
+  "sessionTarget": "isolated",
+  "enabled": true,
+  "delivery": {
+    "mode": "announce"
+  },
+  "script": "/home/kevin/.openclaw/workspace/tools/error-weekly-summary.js"
+}

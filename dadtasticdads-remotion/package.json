@@ -1,0 +1,22 @@
+{
+  "name": "dadtasticdads-remotion",
+  "version": "1.0.0",
+  "description": "DadtasticDads daily dad joke videos with Remotion",
+  "scripts": {
+    "start": "remotion studio",
+    "build": "remotion render dad-joke-video DadJokeVideo --input-props='{\"joke\":\"Why did the chicken cross the road? To get to the second-hand store!\",\"audioUrl\":\"https://example.com/test.mp3\",\"imageUrl\":\"https://example.com/test.png\"}'",
+    "upgrade": "remotion upgrade"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.0",
+    "@remotion/media": "^4.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "remotion": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0"
+  }
+}

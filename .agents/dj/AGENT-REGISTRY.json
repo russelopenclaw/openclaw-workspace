@@ -1,0 +1,25 @@
+{
+  "agentId": "dj",
+  "name": "DJ",
+  "version": "1.0.0",
+  "role": "creative-companion",
+  "tier": 2,
+  "model": "kimi-k2.5:cloud",
+  "location": ".agents/dj/",
+  "status": "active",
+  "capabilities": [
+    "creative-brainstorming",
+    "vibe-checks", 
+    "content-review",
+    "creative-companion",
+    "breaking-analysis-paralysis"
+  ],
+  "wake_patterns": ["manual", "spawned"],
+  "parent": "alfred",
+  "memory_namespace": "dj",
+  "launch_command": "openclaw sessions_spawn --runtime acp --mode session --agentId dj --label 'DJ Direct'",
+  "spawn_command": "openclaw sessions_spawn --runtime acp --mode run --agentId dj --task '{task}'",
+  "config_file": ".agents/dj/config.json",
+  "created": "2026-03-22",
+  "updated": "2026-03-22"
+}

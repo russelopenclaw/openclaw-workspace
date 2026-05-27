@@ -1,0 +1,29 @@
+[
+  {
+    "type": "dadjoke-video",
+    "videoPath": "/home/kevin/.openclaw/workspace/dadtasticdads-output/joke-28-V1.mp4",
+    "jokeId": 28,
+    "jokeText": "How do you organize a space party? You planet.",
+    "caption": "🎬 Dad Joke #28\n\n\"How do you organize a space party? You planet.\"\n\nReply with:\n• \"publish\" to upload to YouTube\n• \"regenerate [notes]\" to try again",
+    "timestamp": "2026-03-17T11:03:41.894Z",
+    "status": "pending"
+  },
+  {
+    "type": "dadjoke-video",
+    "videoPath": "/home/kevin/.openclaw/workspace/dadtasticdads-output/joke-30-V1.mp4",
+    "jokeId": 30,
+    "jokeText": "It’s raining cats and dogs, so be careful not to step in a poodle.",
+    "caption": "🎬 Dad Joke #30\n\n\"It’s raining cats and dogs, so be careful not to step in a poodle.\"\n\nReply with:\n• \"publish\" to upload to YouTube\n• \"regenerate [notes]\" to try again",
+    "timestamp": "2026-03-18T11:01:30.515Z",
+    "status": "pending"
+  },
+  {
+    "type": "dadjoke-video",
+    "videoPath": "/home/kevin/.openclaw/workspace/dadtasticdads-output/joke-31-V1.mp4",
+    "jokeId": 31,
+    "jokeText": "What do birds give out on Halloween? Tweets.",
+    "caption": "🎬 Dad Joke #31\n\n\"What do birds give out on Halloween? Tweets.\"\n\nReply with:\n• \"publish\" to upload to YouTube\n• \"regenerate [notes]\" to try again",
+    "timestamp": "2026-03-19T11:05:30.904Z",
+    "status": "pending"
+  }
+]

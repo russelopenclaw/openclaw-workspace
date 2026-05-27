@@ -1,0 +1,10 @@
+{
+  "jokeId": "22",
+  "jokeText": "What do you call a magician who has lost their magic? Ian.",
+  "setup": "What do you call a magician who has lost their magic?",
+  "punchline": "Ian.",
+  "jokeType": "SETUP_PUNCHLINE",
+  "backgroundImage": "background.png",
+  "audioUrl": "audio.mp3",
+  "punchlineTiming": 0.75
+}

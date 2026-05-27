@@ -1,0 +1,25 @@
+{
+  "name": "auto-dadjoke-direct",
+  "description": "Generate dad joke video daily at 6 AM using direct APIs (no n8n)",
+  "schedule": "0 6 * * *",
+  "timezone": "America/Chicago",
+  "enabled": true,
+  "script": "/home/kevin/.openclaw/workspace/tools/dadj-direct-orchestrator.js",
+  "runConditions": {
+    "checkIdempotency": true,
+    "skipIfAlreadySent": true
+  },
+  "notification": {
+    "onSuccess": true,
+    "onFailure": true
+  },
+  "logging": {
+    "file": "/home/kevin/.openclaw/workspace/.learnings/DADJOKE-DIRECT.log",
+    "level": "INFO"
+  },
+  "errorLogging": {
+    "mandatory": true,
+    "file": "/home/kevin/.openclaw/workspace/.learnings/DADJOKE-ERRORS.md"
+  },
+  "retryLimit": 3
+}

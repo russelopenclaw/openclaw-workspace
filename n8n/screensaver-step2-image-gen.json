@@ -1,0 +1,222 @@
+{
+  "name": "Screensaver Image Generation (Step 2) - Fixed",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "screensaver-generate-image",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [0, 160],
+      "webhookId": "screensaver-generate-image"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.1.33:7860/sdapi/v1/txt2img",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"prompt\": \"{{ $json.body.prompt }}\",\n  \"negative_prompt\": \"{{ $json.body.negative_prompt || 'blurry, low quality, distorted, deformed objects, watermark, text' }}\",\n  \"steps\": {{ $json.body.steps || 20 }},\n  \"width\": {{ $json.body.width || 1920 }},\n  \"height\": {{ $json.body.height || 1080 }},\n  \"sampler_name\": \"{{ $json.body.sampler_name || 'DPM++ 2M Karras' }}\",\n  \"save_images\": false,\n  \"override_settings\": {\n    \"sd_model_checkpoint\": \"{{ $json.body.model || 'RealVisXL_V4.0' }}\"\n  },\n  \"override_settings_restore_afterwards\": true\n}",
+        "options": {
+          "timeout": 1200000
+        },
+        "responseFormat": "json"
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [224, 160],
+      "id": "generate",
+      "name": "Generate Image"
+    },
+    {
+      "parameters": {
+        "jsCode": "const { body } = $input.item.json;\nconst imageData = $input.item.json.data.images[0];\n\n// Build shell command to decode base64 (fs module blocked in n8n)\nconst tempPath = `/tmp/screensaver-${body.theme}-${body.prompt_number}.png`;\nconst outputImagePath = `screensavers/${body.theme}/raw/img_${body.prompt_number.toString().padStart(2, '0')}.png`;\n\nreturn { \n  imageData,\n  tempPath,\n  outputImagePath,\n  theme: body.theme,\n  prompt_number: body.prompt_number,\n  model: body.model,\n  sampler_name: body.sampler_name,\n  steps: body.steps || 20,\n  negative_prompt: body.negative_prompt || 'blurry, low quality, distorted, deformed objects, watermark, text'\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [448, 160],
+      "id": "prep",
+      "name": "Prepare Data"
+    },
+    {
+      "parameters": {
+        "command": "=echo '{{ $json.imageData }}' | base64 -d > '{{ $json.tempPath }}'"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [672, 160],
+      "id": "decode",
+      "name": "Decode Base64"
+    },
+    {
+      "parameters": {
+        "command": "=mc cp '{{ $json.tempPath }}' hp1/'{{ $json.outputImagePath }}'"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [896, 160],
+      "id": "upload",
+      "name": "Upload to MinIO"
+    },
+    {
+      "parameters": {
+        "jsCode": "const { theme, prompt_number, model, sampler_name, steps, outputImagePath } = $input.json;\nconst id = `ss-${theme}-${prompt_number}`;\n\n// Build SQL command\nconst sql = `UPDATE screensaver_prompts SET status = 'generating', model = '${model}', sampler = '${sampler_name}', steps = ${steps}, image_path = '${outputImagePath}', updated_at = NOW() WHERE id = '${id}';`;\n\nreturn { sql };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 160],
+      "id": "buildSql",
+      "name": "Build SQL"
+    },
+    {
+      "parameters": {
+        "command": "=PGPASSWORD=AlfredDB2026Secure psql -h localhost -U alfred -d mission_control -c \"{{ $json.sql }}\""
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1344, 160],
+      "id": "updateDb",
+      "name": "Update PostgreSQL"
+    },
+    {
+      "parameters": {
+        "command": "=rm -f '{{ $json.tempPath }}'"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1568, 160],
+      "id": "cleanup",
+      "name": "Cleanup"
+    },
+    {
+      "parameters": {
+        "respondWith": "JSON",
+        "responseBody": "={\n  \"success\": true,\n  \"image_path\": \"{{ $json.outputImagePath }}\",\n  \"model\": \"{{ $json.model }}\",\n  \"sampler\": \"{{ $json.sampler_name }}\",\n  \"steps\": {{ $json.steps }},\n  \"theme\": \"{{ $json.theme }}\",\n  \"prompt_number\": {{ $json.prompt_number }}\n}"
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1792, 160],
+      "id": "respond",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Generate Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Image": {
+      "main": [
+        [
+          {
+            "node": "Prepare Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Data": {
+      "main": [
+        [
+          {
+            "node": "Decode Base64",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Decode Base64": {
+      "main": [
+        [
+          {
+            "node": "Upload to MinIO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload to MinIO": {
+      "main": [
+        [
+          {
+            "node": "Build SQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build SQL": {
+      "main": [
+        [
+          {
+            "node": "Update PostgreSQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update PostgreSQL": {
+      "main": [
+        [
+          {
+            "node": "Cleanup",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cleanup": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "screensaver-step2-v5",
+  "meta": {
+    "instanceId": "n8n.wolfeinkc.uk"
+  },
+  "tags": [
+    {
+      "id": "screensaver",
+      "name": "screensaver"
+    }
+  ]
+}

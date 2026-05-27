@@ -1,0 +1,27 @@
+{
+  "agentId": "n8n-agent",
+  "name": "Nexus",
+  "role": "n8n workflow architect",
+  "lifecycle": "semi-persistent",
+  "wakePattern": "on-demand",
+  "mem0Namespace": "n8n-agent",
+  "preferences": {
+    "model": "qwen3.5:cloud",
+    "reasoning": "on",
+    "tools": ["web_search", "web_fetch", "memory_store", "memory_search", "write", "read"],
+    "docs": ["https://docs.n8n.io/"]
+  },
+  "accumulates": [
+    "workflow patterns",
+    "node configurations",
+    "error fixes",
+    "API mappings",
+    "credential setups",
+    "expression syntax"
+  ],
+  "output": {
+    "format": "n8n workflow JSON",
+    "location": ".agents/n8n-agent/docs/",
+    "versioning": "workflow-{name}-v{N}.json"
+  }
+}

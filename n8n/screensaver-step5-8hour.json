@@ -1,0 +1,289 @@
+{
+  "name": "Screensaver Step 5: 8-Hour Compilation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "screensaver-8hour",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [0, 0],
+      "webhookId": "screensaver-8hour"
+    },
+    {
+      "parameters": {
+        "jsCode": "const { theme, audio_url = null } = $input.json;\n\n// MinIO paths\nconst tempDir = `/tmp/screensaver-8h-${theme}-${Date.now()}`;\nconst cyclePath = `${tempDir}/cycle.mp4`;\nconst output8h = `${tempDir}/${theme}_8hour.mp4`;\nconst outputMinioPath = `screensavers/${theme}/final/${theme}_8hour.mp4`;\nconst networkPath = `/mnt/openclaw/workspace/screensavers/${theme}/`;\n\n// Zen audio sources (CC0)\nconst zenAudio = [\n  { name: 'Rain on Leaves', url: 'https://freesound.org/data/previews/346/346562_5121236-lq.mp3' },\n  { name: 'Gentle Stream', url: 'https://freesound.org/data/previews/372/372152_5121236-lq.mp3' },\n  { name: 'Forest Ambience', url: 'https://freesound.org/data/previews/368/368735_5121236-lq.mp3' }\n];\n\nreturn { \n  theme, \n  audio_url, \n  tempDir, \n  cyclePath, \n  output8h, \n  outputMinioPath, \n  networkPath,\n  zenAudio \n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [200, 0],
+      "id": "prep",
+      "name": "Prepare Paths"
+    },
+    {
+      "parameters": {
+        "command": "=mkdir -p {{ $json.tempDir }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [400, 0],
+      "id": "mkdir",
+      "name": "Create Temp Dir"
+    },
+    {
+      "parameters": {
+        "command": "=mc cp hp1/screensavers/{{ $json.theme }}/cycles/{{ $json.theme }}_20min_cycle.mp4 {{ $json.cyclePath }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [600, 0],
+      "id": "download",
+      "name": "Download Cycle"
+    },
+    {
+      "parameters": {
+        "jsCode": "const { cyclePath, tempDir, theme } = $input.json;\nconst fs = require('fs');\nconst path = require('path');\n\n// Create concat file for 24 loops (20 min × 24 = 8 hours)\nconst concatFile = path.join(tempDir, 'concat.txt');\nlet concatContent = '';\nfor (let i = 0; i < 24; i++) {\n  concatContent += `file '${cyclePath}'\\n`;\n}\nfs.writeFileSync(concatFile, concatContent);\n\nreturn { concatFile, loops: 24 };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [800, 0],
+      "id": "prepLoop",
+      "name": "Prepare Loop"
+    },
+    {
+      "parameters": {
+        "command": "=ffmpeg -y -f concat -safe 0 -i {{ $json.prepLoop.concatFile }} -c copy {{ $json.output8h }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1000, 0],
+      "id": "loop",
+      "name": "Loop to 8 Hours"
+    },
+    {
+      "parameters": {
+        "command": "=ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 {{ $json.output8h }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1200, 0],
+      "id": "validate",
+      "name": "Validate Duration"
+    },
+    {
+      "parameters": {
+        "jsCode": "const { audio_url, zenAudio, tempDir } = $input.json;\nconst { execSync } = require('child_process');\nconst path = require('path');\n\nif (audio_url) {\n  // Download custom audio\n  const audioPath = path.join(tempDir, 'zen.mp3');\n  execSync(`curl -sL \"${audio_url}\" -o \"${audioPath}\"`, { timeout: 60000 });\n  return { audioPath, hasAudio: true };\n} else {\n  // Use default zen audio (first source)\n  const audioPath = path.join(tempDir, 'zen_default.mp3');\n  try {\n    execSync(`curl -sL \"${zenAudio[0].url}\" -o \"${audioPath}\"`, { timeout: 60000 });\n    return { audioPath, hasAudio: true, source: zenAudio[0].name };\n  } catch (e) {\n    return { hasAudio: false };\n  }\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1400, 0],
+      "id": "prepAudio",
+      "name": "Prepare Audio"
+    },
+    {
+      "parameters": {
+        "command": "={{ $json.prepAudio.hasAudio ? `ffmpeg -y -i ${$json.output8h} -stream_loop -1 -i ${$json.prepAudio.audioPath} -shortest -filter_complex \"[1:a]volume=0.3[audio]\" -map 0:v -map \"[audio]\" -c:v copy -c:a aac -b:a 192k ${$json.output8h}.mp3` : 'echo \"No audio, skipping\"' }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1600, 0],
+      "id": "addAudio",
+      "name": "Add Zen Audio"
+    },
+    {
+      "parameters": {
+        "command": "=mc cp {{ $json.output8h }}{{ $json.prepAudio.hasAudio ? '.mp3' : '' }} hp1/{{ $json.outputMinioPath }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1800, 0],
+      "id": "upload",
+      "name": "Upload to MinIO"
+    },
+    {
+      "parameters": {
+        "command": "=mkdir -p {{ $json.networkPath }} && cp {{ $json.output8h }}{{ $json.prepAudio.hasAudio ? '.mp3' : '' }} {{ $json.networkPath }}{{ $json.theme }}_8hour.mp4"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [2000, 0],
+      "id": "network",
+      "name": "Copy to Network"
+    },
+    {
+      "parameters": {
+        "command": "=rm -rf {{ $json.tempDir }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [2200, 0],
+      "id": "cleanup",
+      "name": "Cleanup"
+    },
+    {
+      "parameters": {
+        "respondWith": "JSON",
+        "responseBody": "={\n  \"success\": true,\n  \"video_path\": \"{{ $json.outputMinioPath }}\",\n  \"network_path\": \"{{ $json.networkPath }}{{ $json.theme }}_8hour.mp4\",\n  \"duration_hours\": {{ parseFloat($validate.output) / 3600 }},\n  \"has_audio\": {{ $json.prepAudio.hasAudio }},\n  \"audio_source\": \"{{ $json.prepAudio.source || 'none' }}\",\n  \"theme\": \"{{ $json.theme }}\"\n}"
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [2400, 0],
+      "id": "respond",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Prepare Paths",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Paths": {
+      "main": [
+        [
+          {
+            "node": "Create Temp Dir",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Temp Dir": {
+      "main": [
+        [
+          {
+            "node": "Download Cycle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Cycle": {
+      "main": [
+        [
+          {
+            "node": "Prepare Loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Loop": {
+      "main": [
+        [
+          {
+            "node": "Loop to 8 Hours",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop to 8 Hours": {
+      "main": [
+        [
+          {
+            "node": "Validate Duration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Duration": {
+      "main": [
+        [
+          {
+            "node": "Prepare Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Audio": {
+      "main": [
+        [
+          {
+            "node": "Add Zen Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Zen Audio": {
+      "main": [
+        [
+          {
+            "node": "Upload to MinIO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload to MinIO": {
+      "main": [
+        [
+          {
+            "node": "Copy to Network",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copy to Network": {
+      "main": [
+        [
+          {
+            "node": "Cleanup",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cleanup": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "screensaver-step5-v1",
+  "meta": {
+    "instanceId": "n8n.wolfeinkc.uk"
+  },
+  "tags": [
+    {
+      "id": "screensaver",
+      "name": "screensaver"
+    }
+  ]
+}

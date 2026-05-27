@@ -1,0 +1,58 @@
+{
+  "totalDuration": "114.40",
+  "steps": {
+    "step1-fetch-joke": {
+      "start": 1772717548638,
+      "end": 1772717549697,
+      "duration": "1.06"
+    },
+    "step2-generate-audio": {
+      "start": 1772717549698,
+      "end": 1772717551180,
+      "duration": "1.48"
+    },
+    "step3-detect-format": {
+      "start": 1772717551180,
+      "end": 1772717564126,
+      "duration": "12.95"
+    },
+    "step4-image-prompt": {
+      "start": 1772717564126,
+      "end": 1772717573768,
+      "duration": "9.64"
+    },
+    "step5-generate-image": {
+      "start": 1772717573768,
+      "end": 1772717648590,
+      "duration": "74.82"
+    },
+    "step6-render-video": {
+      "start": 1772717648590,
+      "end": 1772717659028,
+      "duration": "10.44"
+    },
+    "step7-quality-verify": {
+      "start": 1772717659028,
+      "end": 1772717659903,
+      "duration": "0.88"
+    },
+    "step8-update-sheets": {
+      "start": 1772717659903,
+      "end": 1772717660455,
+      "duration": "0.55"
+    },
+    "step9-upload-here-now": {
+      "start": 1772717660455,
+      "end": 1772717662434,
+      "duration": "1.98"
+    },
+    "step10-backup-minio": {
+      "start": 1772717662435,
+      "end": 1772717663036,
+      "duration": "0.60"
+    }
+  },
+  "jokeId": "21",
+  "qualityScore": 93,
+  "timestamp": "2026-03-05T13:34:23.037Z"
+}

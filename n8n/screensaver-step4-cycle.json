@@ -1,0 +1,226 @@
+{
+  "name": "Screensaver Step 4: 20-Minute Cycle Assembly",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "screensaver-cycle",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [0, 0],
+      "webhookId": "screensaver-cycle"
+    },
+    {
+      "parameters": {
+        "jsCode": "const { theme } = $input.json;\n\n// MinIO paths\nconst tempDir = `/tmp/screensaver-cycle-${theme}-${Date.now()}`;\nconst clipsDir = `${tempDir}/clips`;\nconst outputCycle = `${tempDir}/${theme}_20min_cycle.mp4`;\nconst outputMinioPath = `screensavers/${theme}/cycles/${theme}_20min_cycle.mp4`;\n\nreturn { theme, tempDir, clipsDir, outputCycle, outputMinioPath };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [200, 0],
+      "id": "prep",
+      "name": "Prepare Paths"
+    },
+    {
+      "parameters": {
+        "command": "=mkdir -p {{ $json.clipsDir }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [400, 0],
+      "id": "mkdir",
+      "name": "Create Temp Dir"
+    },
+    {
+      "parameters": {
+        "command": "=mc cp hp1/screensavers/{{ $json.theme }}/clips/ {{ $json.clipsDir }}/ --recursive"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [600, 0],
+      "id": "download",
+      "name": "Download Clips"
+    },
+    {
+      "parameters": {
+        "jsCode": "const { clipsDir, theme } = $input.json;\nconst fs = require('fs');\nconst path = require('path');\n\n// Get all clips sorted\nconst clips = fs.readdirSync(clipsDir)\n  .filter(f => f.endsWith('.mp4'))\n  .sort((a, b) => {\n    const numA = parseInt(a.match(/\\d+/)?.[0] || 0);\n    const numB = parseInt(b.match(/\\d+/)?.[0] || 0);\n    return numA - numB;\n  });\n\nif (clips.length !== 40) {\n  throw new Error(`Expected 40 clips, found ${clips.length}`);\n}\n\n// Build ffmpeg concat list\nconst concatFile = path.join(clipsDir, 'concat.txt');\nlet concatContent = '';\nfor (let i = 0; i < clips.length; i++) {\n  concatContent += `file '${path.join(clipsDir, clips[i])}'\\n`;\n}\nfs.writeFileSync(concatFile, concatContent);\n\n// Build xfade filter for seamless loop\n// 40 clips × 27s = 1080s, 39 transitions × 3s = 117s, total ~20 min\nlet filter = '';\nlet offset = 27; // First clip duration\n\nfor (let i = 0; i < clips.length - 1; i++) {\n  const nextIdx = i + 1;\n  const prevLabel = i === 0 ? '[0:v]' : `[v${i-1}]`;\n  const nextLabel = i === clips.length - 2 ? '[outv]' : `[v${i}]`;\n  filter += `${prevLabel}[${nextIdx}:v]xfade=transition=fade:duration=3:offset=${offset}:easing=linear${nextLabel};`;\n  offset += 24; // 27s - 3s overlap\n}\n\n// Add loop transition (last → first)\nfilter += `[v${clips.length-2}][0:v]xfade=transition=fade:duration=3:offset=${offset}:easing=linear[loopout];`;\n\nreturn { \n  clips: clips.map(c => path.join(clipsDir, c)), \n  concatFile, \n  filter, \n  outputCycle: path.join(clipsDir, `${theme}_20min_cycle.mp4`),\n  numClips: clips.length \n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [800, 0],
+      "id": "buildFilter",
+      "name": "Build Xfade Filter"
+    },
+    {
+      "parameters": {
+        "command": "=ffmpeg -y {{ $json.clips.map((c, i) => `-i \"${c}\"`).join(' ') }} -filter_complex \"{{ $json.filter.replace(/;/g, '\\\\;') }}\" -map \"[loopout]\" -c:v libx264 -preset slow -crf 18 -pix_fmt yuv420p \"{{ $json.outputCycle }}\""
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1000, 0],
+      "id": "stitch",
+      "name": "Stitch Cycle"
+    },
+    {
+      "parameters": {
+        "command": "=ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 {{ $json.outputCycle }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1200, 0],
+      "id": "validate",
+      "name": "Validate Duration"
+    },
+    {
+      "parameters": {
+        "command": "=mc cp {{ $json.outputCycle }} hp1/{{ $json.outputMinioPath }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1400, 0],
+      "id": "upload",
+      "name": "Upload to MinIO"
+    },
+    {
+      "parameters": {
+        "command": "=rm -rf {{ $json.tempDir }}"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1600, 0],
+      "id": "cleanup",
+      "name": "Cleanup"
+    },
+    {
+      "parameters": {
+        "respondWith": "JSON",
+        "responseBody": "={\n  \"success\": true,\n  \"cycle_path\": \"{{ $json.outputMinioPath }}\",\n  \"duration\": {{ $validate.output }},\n  \"clips_count\": {{ $buildFilter.numClips }},\n  \"theme\": \"{{ $json.theme }}\"\n}"
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1800, 0],
+      "id": "respond",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Prepare Paths",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Paths": {
+      "main": [
+        [
+          {
+            "node": "Create Temp Dir",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Temp Dir": {
+      "main": [
+        [
+          {
+            "node": "Download Clips",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Clips": {
+      "main": [
+        [
+          {
+            "node": "Build Xfade Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Xfade Filter": {
+      "main": [
+        [
+          {
+            "node": "Stitch Cycle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Stitch Cycle": {
+      "main": [
+        [
+          {
+            "node": "Validate Duration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Duration": {
+      "main": [
+        [
+          {
+            "node": "Upload to MinIO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload to MinIO": {
+      "main": [
+        [
+          {
+            "node": "Cleanup",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cleanup": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "screensaver-step4-v1",
+  "meta": {
+    "instanceId": "n8n.wolfeinkc.uk"
+  },
+  "tags": [
+    {
+      "id": "screensaver",
+      "name": "screensaver"
+    }
+  ]
+}

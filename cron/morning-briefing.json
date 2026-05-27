@@ -1,0 +1,20 @@
+{
+  "name": "Morning Briefing",
+  "schedule": {
+    "kind": "cron",
+    "expr": "0 7 * * *",
+    "tz": "America/Chicago"
+  },
+  "payload": {
+    "kind": "agentTurn",
+    "message": "IMPORTANT: Respond in English only. Run the morning briefing: execute `node /home/kevin/.openclaw/workspace/tools/morning-briefing.js` and send the output to Kevin via Telegram (target: telegram:8177470832). Format it nicely with the weather high temp and precipitation info.",
+    "model": "qwen3.5:cloud",
+    "thinking": "off",
+    "timeoutSeconds": 120
+  },
+  "sessionTarget": "isolated",
+  "enabled": true,
+  "delivery": {
+    "mode": "announce"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "Google Calendar Reminders (30-min window)",
+  "schedule": {
+    "kind": "cron",
+    "expr": "*/5 * * * *",
+    "tz": "America/Chicago"
+  },
+  "payload": {
+    "kind": "systemEvent",
+    "text": "Check Google Calendar for events starting within 30 minutes. If any found, send Telegram alert via message tool."
+  },
+  "sessionTarget": "main",
+  "enabled": true,
+  "delivery": {
+    "mode": "none"
+  },
+  "note": "Uses GCal as source of truth. Only alerts when events are within 30 min. Silent otherwise. Runs every 5 min."
+}

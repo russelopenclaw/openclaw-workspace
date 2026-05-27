@@ -1,0 +1,47 @@
+{
+  "generated": [
+    {
+      "type": "pattern",
+      "priority": "high",
+      "category": "productivity",
+      "title": "Batch similar small tasks",
+      "description": "You completed 13 tasks in 7 days (avg 1.0h each). Consider batching them into a single automation script to save time.",
+      "effort": "1-2 hours",
+      "impact": "Reduces repetitive work"
+    },
+    {
+      "type": "signal",
+      "priority": "high",
+      "category": "reliability",
+      "title": "Review and resolve active errors",
+      "description": "2 errors logged in .learnings/ERRORS.md. Review and implement fixes or mark as resolved.",
+      "effort": "30 min - 1 hour",
+      "impact": "Improves system reliability"
+    },
+    {
+      "type": "pattern",
+      "priority": "medium",
+      "category": "quality",
+      "title": "Document and test completed features",
+      "description": "13 tasks completed recently. Create runbooks, add tests, and document architecture for future maintenance.",
+      "effort": "2-4 hours",
+      "impact": "Preserves institutional knowledge"
+    },
+    {
+      "type": "meta",
+      "priority": "medium",
+      "category": "optimization",
+      "title": "System improvement: Automate a manual process",
+      "description": "Review completed work patterns. Identify one repetitive task that could be automated (e.g., morning briefings, health checks, backups). Automate it to reduce future toil.",
+      "effort": "1-2 hours",
+      "impact": "Permanent time savings"
+    }
+  ],
+  "context": {
+    "completions": 13,
+    "backlog": 1,
+    "signals": 1,
+    "events": 0
+  },
+  "timestamp": "2026-03-11T21:00:10.444Z"
+}

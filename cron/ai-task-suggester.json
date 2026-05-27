@@ -1,0 +1,10 @@
+{
+  "name": "ai-task-suggester",
+  "command": "node /home/kevin/.openclaw/workspace/tools/ai-task-suggester.js",
+  "schedule": "on-demand",
+  "description": "Analyze work patterns and generate smart task suggestions",
+  "enabled": true,
+  "trigger": "Run during morning briefing or when user asks for suggestions",
+  "output": ".suggested-tasks.json",
+  "createdAt": "2026-03-11T21:00:00Z"
+}

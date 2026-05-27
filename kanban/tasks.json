@@ -1,0 +1,1 @@
+{"_comment": "LEGACY FILE - PostgreSQL is now the source of truth. Do not use this file.", "_migration_date": "2026-03-05", "_database": "postgresql://alfred@localhost/mission_control"}

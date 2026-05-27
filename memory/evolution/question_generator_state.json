@@ -1,0 +1,6 @@
+{
+  "lastAskedAt": "2026-03-02T23:26:11.482Z",
+  "recentQuestions": [
+    "Performance bottleneck detected: **ASSISTANT**: SD is processing but ETA is **409 seconds** (almost 7 minutes)! That's the problem. At step 5/20 with 409s ETA, this confirms the 6-10  -- What optimization strategies or architectural patterns address this?"
+  ]
+}

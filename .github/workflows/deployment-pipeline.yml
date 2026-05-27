@@ -1,0 +1,213 @@
+name: Deployment Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+      phase:
+        description: 'Pipeline phase to run'
+        required: false
+        default: 'full'
+        type: choice
+        options:
+          - pre
+          - post
+          - full
+          - rollback
+
+env:
+  NODE_VERSION: '22'
+  DATABASE_HOST: 'localhost'
+  DATABASE_PORT: '5432'
+  DATABASE_NAME: 'mission_control'
+  DATABASE_USER: 'alfred'
+
+jobs:
+  pre-deployment-checks:
+    name: Pre-Deployment Checks
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || 'staging' }}
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: ${{ env.DATABASE_NAME }}
+          POSTGRES_USER: ${{ env.DATABASE_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD || 'AlfredDB2026Secure' }}
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run pre-deployment checks
+        run: node tools/deployment-pipeline.js --phase pre --environment ${{ github.event.inputs.environment || 'staging' }} --report-format json
+        env:
+          PGPASSWORD: ${{ secrets.DB_PASSWORD || 'AlfredDB2026Secure' }}
+
+      - name: Upload deployment report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-report-pre-${{ github.run_id }}
+          path: .learnings/deployment-reports/*.json
+          retention-days: 30
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: pre-deployment-checks
+    environment:
+      name: ${{ github.event.inputs.environment || 'staging' }}
+      url: ${{ vars.DEPLOYMENT_URL }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run database migrations
+        run: node tools/migrations/run-all.js
+        env:
+          PGPASSWORD: ${{ secrets.DB_PASSWORD || 'AlfredDB2026Secure' }}
+          DATABASE_HOST: ${{ env.DATABASE_HOST }}
+
+      - name: Build Mission Control
+        run: |
+          cd mission-control
+          npm ci
+          npm run build
+
+      - name: Deploy to server
+        run: |
+          # Example deployment using SSH
+          # Replace with your actual deployment method
+          echo "Deploying to ${{ github.event.inputs.environment || 'staging' }}"
+          # ssh -i ${{ secrets.SSH_KEY }} user@server "
+          #   cd /path/to/workspace &&
+          #   git pull &&
+          #   npm install &&
+          #   systemctl --user restart alfred-hub
+          # "
+        env:
+          DEPLOYMENT_TARGET: ${{ vars.DEPLOYMENT_SERVER }}
+
+      - name: Wait for deployment
+        run: sleep 10
+
+  post-deployment-smoke-tests:
+    name: Post-Deployment Smoke Tests
+    runs-on: ubuntu-latest
+    needs: deploy
+    environment: ${{ github.event.inputs.environment || 'staging' }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run smoke tests
+        run: node tools/deployment-pipeline.js --phase post --environment ${{ github.event.inputs.environment || 'staging' }} --report-format json
+        env:
+          GATEWAY_HOST: ${{ vars.GATEWAY_HOST || 'localhost' }}
+          GATEWAY_PORT: ${{ vars.GATEWAY_PORT || '18789' }}
+
+      - name: Upload deployment report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-report-post-${{ github.run_id }}
+          path: .learnings/deployment-reports/*.json
+          retention-days: 30
+
+      - name: Create deployment summary
+        if: always()
+        run: |
+          echo "## Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** ${{ github.event.inputs.environment || 'staging' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Time:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ ${{ job.status }} == 'success' ]; then
+            echo "✅ Deployment successful" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Deployment failed" >> $GITHUB_STEP_SUMMARY
+          fi
+
+  rollback:
+    name: Rollback (on failure)
+    runs-on: ubuntu-latest
+    needs: [deploy, post-deployment-smoke-tests]
+    if: failure()
+    environment: ${{ github.event.inputs.environment || 'staging' }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Execute rollback
+        run: node tools/deployment-pipeline.js --phase rollback --environment ${{ github.event.inputs.environment || 'staging' }}
+        env:
+          PGPASSWORD: ${{ secrets.DB_PASSWORD || 'AlfredDB2026Secure' }}
+          GATEWAY_HOST: ${{ vars.GATEWAY_HOST || 'localhost' }}
+
+      - name: Notify rollback
+        run: |
+          echo "🔄 Rollback executed for deployment ${{ github.run_id }}"
+          echo "Environment: ${{ github.event.inputs.environment || 'staging' }}"
+          echo "Previous commit: ${{ github.sha }}"

@@ -1,0 +1,9 @@
+{
+  "prompt": "a step ladder leaning against a white wall, clean minimalist product photography, professional studio lighting, no people, simple background, photorealistic, sharp focus, high detail, 8k",
+  "negative_prompt": "people, person, human, face, hands, fingers, cartoon, illustration, drawing, painting, AI, blurry, deformed",
+  "width": 512,
+  "height": 768,
+  "steps": 30,
+  "cfg_scale": 7,
+  "seed": -1
+}

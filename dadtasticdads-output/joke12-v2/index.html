@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dad Joke #12 | DadtasticDads</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(135deg, #102A54 0%, #163A63 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: Verdana, Geneva, sans-serif;
+      padding: 20px;
+    }
+    .container {
+      max-width: 100%;
+      width: 100%;
+    }
+    video {
+      width: 100%;
+      max-width: 480px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      display: block;
+      margin: 0 auto;
+      background: #000;
+    }
+    .brand {
+      margin-top: 30px;
+      text-align: center;
+      color: #F8EFE1;
+    }
+    .brand h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: #FF8A2B;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    .brand p {
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+    .joke-text {
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px auto;
+      max-width: 480px;
+      color: #F8EFE1;
+      font-size: 1.2em;
+      text-align: center;
+      line-height: 1.5;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    .joke-label {
+      background: #FF8A2B;
+      color: #102A54;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9em;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="joke-label">🎬 Dad Joke #12</div>
+    
+    <video controls playsinline preload="metadata">
+      <source src="video.mp4" type="video/mp4">
+      Your browser doesn't support the video element.
+    </video>
+    
+    <div class="joke-text">
+      "My dog used to chase people on a bike a lot. It got so bad I had to take his bike away."
+    </div>
+    
+    <div class="brand">
+      <h1>🎬 DadtasticDads</h1>
+      <p>Daily dad jokes in video form</p>
+    </div>
+  </div>
+</body>
+</html>

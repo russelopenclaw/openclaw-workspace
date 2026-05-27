@@ -1,0 +1,250 @@
+{
+  "events": [
+    {
+      "title": "Test Meeting from Brain",
+      "date": "2026-03-05",
+      "startTime": "14:00",
+      "endTime": "15:00",
+      "type": "personal",
+      "description": "",
+      "id": "evt-1772595193385"
+    },
+    {
+      "id": "evt-1772595247161",
+      "title": "Team meeting",
+      "description": "",
+      "start": "2026-03-04T20:00:00.000Z",
+      "end": "2026-03-04T21:00:00.000Z",
+      "createdAt": "2026-03-04T03:34:07.162Z"
+    },
+    {
+      "id": "evt-1772595247220",
+      "title": "Doctor appointment",
+      "description": "",
+      "start": "2026-03-09T14:00:00.000Z",
+      "end": "2026-03-09T15:00:00.000Z",
+      "createdAt": "2026-03-04T03:34:07.220Z"
+    },
+    {
+      "id": "evt-1772595247221",
+      "title": "Birthday party on",
+      "description": "",
+      "start": "2026-03-15T14:00:00.000Z",
+      "end": "2026-03-15T15:00:00.000Z",
+      "createdAt": "2026-03-04T03:34:07.221Z"
+    },
+    {
+      "id": "evt-1772595274586",
+      "title": "Doctor appointment",
+      "description": "",
+      "start": "2026-03-09T14:00:00.000Z",
+      "end": "2026-03-09T15:00:00.000Z",
+      "createdAt": "2026-03-04T03:34:34.586Z"
+    },
+    {
+      "id": "evt-1772595274587",
+      "title": "Birthday party on",
+      "description": "",
+      "start": "2026-03-15T14:00:00.000Z",
+      "end": "2026-03-15T15:00:00.000Z",
+      "createdAt": "2026-03-04T03:34:34.587Z"
+    },
+    {
+      "id": "evt-1772595409678",
+      "title": "Doctor appointment",
+      "description": "",
+      "start": "2026-03-09T14:00:00.000Z",
+      "end": "2026-03-09T15:00:00.000Z",
+      "createdAt": "2026-03-04T03:36:49.678Z"
+    },
+    {
+      "id": "evt-1772595409680",
+      "title": "Birthday party",
+      "description": "",
+      "start": "2026-03-15T23:00:00.000Z",
+      "end": "2026-03-16T00:00:00.000Z",
+      "createdAt": "2026-03-04T03:36:49.680Z"
+    },
+    {
+      "id": "evt-1772597037262",
+      "title": "Create event Weekly standup",
+      "description": "",
+      "start": "2026-03-03T15:00:00.000Z",
+      "end": "2026-03-03T16:00:00.000Z",
+      "createdAt": "2026-03-04T04:03:57.263Z",
+      "recurrence": "FREQ=WEEKLY;BYDAY=MO",
+      "recurrenceDescription": "Every monday"
+    },
+    {
+      "id": "evt-1772597037282",
+      "title": "Create event Daily scrum at 8am",
+      "description": "",
+      "start": "2026-03-03T14:00:00.000Z",
+      "end": "2026-03-03T15:00:00.000Z",
+      "createdAt": "2026-03-04T04:03:57.282Z",
+      "recurrence": "FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR",
+      "recurrenceDescription": "Every weekday"
+    },
+    {
+      "id": "evt-1772597037283",
+      "title": "Create event Monthly review at 6pm",
+      "description": "",
+      "start": "2026-03-03T07:00:00.000Z",
+      "end": "2026-03-03T08:00:00.000Z",
+      "createdAt": "2026-03-04T04:03:57.283Z",
+      "recurrence": "FREQ=MONTHLY;BYMONTHDAY=1",
+      "recurrenceDescription": "Every 1st of month"
+    },
+    {
+      "id": "evt-1772597037283",
+      "title": "Create event Bi-weekly sync",
+      "description": "",
+      "start": "2026-03-03T08:00:00.000Z",
+      "end": "2026-03-03T09:00:00.000Z",
+      "createdAt": "2026-03-04T04:03:57.283Z",
+      "recurrence": "FREQ=WEEKLY;INTERVAL=2;BYDAY=FR",
+      "recurrenceDescription": "Every 2 weeks on friday"
+    },
+    {
+      "id": "evt-1772597037284",
+      "title": "Create event Team lunch",
+      "description": "",
+      "start": "2026-03-03T18:00:00.000Z",
+      "end": "2026-03-03T19:00:00.000Z",
+      "createdAt": "2026-03-04T04:03:57.284Z",
+      "recurrence": "FREQ=WEEKLY;BYDAY=FR",
+      "recurrenceDescription": "Every friday"
+    },
+    {
+      "id": "evt-1772597198793",
+      "title": "Weekly standup",
+      "description": "",
+      "start": "2026-03-03T15:00:00.000Z",
+      "end": "2026-03-03T16:00:00.000Z",
+      "createdAt": "2026-03-04T04:06:38.793Z",
+      "recurrence": "FREQ=WEEKLY;BYDAY=MO",
+      "recurrenceDescription": "Every monday"
+    },
+    {
+      "id": "evt-1772597198814",
+      "title": "Daily scrum at 8am",
+      "description": "",
+      "start": "2026-03-03T14:00:00.000Z",
+      "end": "2026-03-03T15:00:00.000Z",
+      "createdAt": "2026-03-04T04:06:38.814Z",
+      "recurrence": "FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR",
+      "recurrenceDescription": "Every weekday"
+    },
+    {
+      "id": "evt-1772597198816",
+      "title": "Team lunch",
+      "description": "",
+      "start": "2026-03-03T18:00:00.000Z",
+      "end": "2026-03-03T19:00:00.000Z",
+      "createdAt": "2026-03-04T04:06:38.816Z",
+      "recurrence": "FREQ=WEEKLY;BYDAY=FR",
+      "recurrenceDescription": "Every friday"
+    },
+    {
+      "id": "evt-1772597202310",
+      "title": "Weekly standup",
+      "description": "",
+      "start": "2026-03-03T15:00:00.000Z",
+      "end": "2026-03-03T16:00:00.000Z",
+      "createdAt": "2026-03-04T04:06:42.310Z",
+      "recurrence": "FREQ=WEEKLY;BYDAY=MO",
+      "recurrenceDescription": "Every monday"
+    },
+    {
+      "id": "evt-1772597202328",
+      "title": "Bi-weekly sync",
+      "description": "",
+      "start": "2026-03-03T20:00:00.000Z",
+      "end": "2026-03-03T21:00:00.000Z",
+      "createdAt": "2026-03-04T04:06:42.328Z",
+      "recurrence": "FREQ=WEEKLY;INTERVAL=2;BYDAY=FR",
+      "recurrenceDescription": "Every 2 weeks on friday"
+    },
+    {
+      "id": "evt-1772597202328",
+      "title": "Team lunch",
+      "description": "",
+      "start": "2026-03-03T18:00:00.000Z",
+      "end": "2026-03-03T19:00:00.000Z",
+      "createdAt": "2026-03-04T04:06:42.328Z",
+      "recurrence": "FREQ=WEEKLY;BYDAY=FR",
+      "recurrenceDescription": "Every friday"
+    },
+    {
+      "id": "evt-1772597533939",
+      "title": "Weekly standup",
+      "description": "",
+      "start": "2026-03-03T15:00:00.000Z",
+      "end": "2026-03-03T16:00:00.000Z",
+      "createdAt": "2026-03-04T04:12:13.939Z",
+      "recurrence": "FREQ=WEEKLY;BYDAY=MO",
+      "recurrenceDescription": "Every monday"
+    },
+    {
+      "id": "evt-1772597533957",
+      "title": "Daily scrum at 8am",
+      "description": "",
+      "start": "2026-03-03T14:00:00.000Z",
+      "end": "2026-03-03T15:00:00.000Z",
+      "createdAt": "2026-03-04T04:12:13.957Z",
+      "recurrence": "FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR",
+      "recurrenceDescription": "Every weekday"
+    },
+    {
+      "id": "evt-1772600095771",
+      "title": "Weekly standup",
+      "description": "",
+      "start": "2026-03-03T15:00:00.000Z",
+      "end": "2026-03-03T16:00:00.000Z",
+      "createdAt": "2026-03-04T04:54:55.771Z",
+      "recurrence": "FREQ=WEEKLY;BYDAY=MO",
+      "recurrenceDescription": "Every monday"
+    },
+    {
+      "id": "evt-1772600218585",
+      "title": "Lunch meeting",
+      "description": "",
+      "start": "2026-03-03T20:00:00.000Z",
+      "end": "2026-03-03T21:00:00.000Z",
+      "createdAt": "2026-03-04T04:56:58.585Z"
+    },
+    {
+      "id": "evt-1772601359190",
+      "title": "Weekly standup",
+      "description": "",
+      "start": "2026-03-03T15:00:00.000Z",
+      "end": "2026-03-03T16:00:00.000Z",
+      "createdAt": "2026-03-04T05:15:59.190Z",
+      "recurrence": "FREQ=WEEKLY;BYDAY=MO",
+      "recurrenceDescription": "Every monday"
+    },
+    {
+      "id": "evt-1772601359208",
+      "title": "Daily standup",
+      "description": "",
+      "start": "2026-03-03T14:00:00.000Z",
+      "end": "2026-03-03T15:00:00.000Z",
+      "createdAt": "2026-03-04T05:15:59.208Z",
+      "recurrence": "FREQ=DAILY",
+      "recurrenceDescription": "Every day"
+    },
+    {
+      "title": "Deacons Meeting",
+      "date": "2026-03-17",
+      "startTime": "18:00",
+      "endTime": "20:00",
+      "type": "personal",
+      "description": "Monthly deacons meeting",
+      "id": "evt-1772631056719"
+    }
+  ],
+  "metadata": {
+    "lastUpdated": "2026-03-04T15:18:38.281Z",
+    "version": "1.0"
+  }
+}

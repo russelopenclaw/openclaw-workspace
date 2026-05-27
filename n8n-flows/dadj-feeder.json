@@ -1,0 +1,73 @@
+{
+  "name": "Dad Joke Feeder",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [250, 300],
+      "id": "webhook-trigger",
+      "name": "Webhook",
+      "notes": "Triggered by n8n schedule or manual. No parameters required.",
+      "webhookId": "dadj-feeder-trigger"
+    },
+    {
+      "parameters": {
+        "operation": "getRange",
+        "spreadsheetId": "1cXSGjCXleUK8iQweBAwLaa7j3QK2Sla-8v11CirQsuw",
+        "range": "Sheet1!A:E",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.1,
+      "position": [450, 300],
+      "id": "google-sheets-read",
+      "name": "Google Sheets",
+      "notes": "Reads all rows from Dadabase. Configure Google Sheets credentials in n8n settings.",
+      "credentialType": "googleSheetsOAuth2Api"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Transform Google Sheets response to expected format\nconst dadabase = $input.all();\n\n// Find first unused joke (Used == false or empty)\nconst unused = dadabase.find(row => {\n  const used = row.json.Used;\n  return used === false || used === 'FALSE' || used === '' || used === undefined || used === null;\n});\n\nif (!unused) {\n  return [{ json: { error: 'No unused jokes found', found: false } }];\n}\n\n// Extract row number (Google Sheets API returns row number in 'row' field, or calculate from index)\nconst rowNumber = unused.json['row'] || (dadbabase.indexOf(unused) + 2); // +2 for header row\n\nreturn [{\n  json: {\n    row_number: rowNumber,\n    'Joke ID': unused.json['Joke ID'] || unused.json['id'],\n    Joke: unused.json.Joke || unused.json.joke,\n    Used: false,\n    Posted: unused.json.Posted || ''\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [650, 300],
+      "id": "transform-output",
+      "name": "Transform",
+      "notes": "Finds first unused joke and formats output. Adjust field names if your sheet columns differ."
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Transform",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "dadj-feeder-v1",
+  "meta": {
+    "instanceId": "n8n-dadj-feeder"
+  },
+  "tags": ["dad-jokes", "dadbabase", "fetch"]
+}

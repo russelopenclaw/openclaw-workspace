@@ -1,0 +1,38 @@
+{
+  "_DEPRECATED": "This file is deprecated. PostgreSQL is now the single source of truth for agent status.",
+  "_migrationDate": "2026-03-05",
+  "_note": "All systems should read from PostgreSQL 'agents' table. This file is kept for backwards compatibility only and will be removed in a future cleanup.",
+  "legacy_agents": {
+    "alfred": {
+      "status": "See PostgreSQL agents table",
+      "currentTask": "See PostgreSQL agents table",
+      "lastActivity": "DEPRECATED"
+    },
+    "jeeves": {
+      "status": "See PostgreSQL agents table",
+      "currentTask": "See PostgreSQL agents table",
+      "lastActivity": "DEPRECATED"
+    }
+  },
+  "epics": {
+    "dadjasticdads-pipeline": {
+      "name": "DadtasticDads Video Pipeline",
+      "status": "operational",
+      "description": "Automated dad joke video generation with quality gates",
+      "features": [
+        "Google Sheets integration (Dadabase)",
+        "ElevenLabs audio generation with caching",
+        "Stable Diffusion image generation (512x768, 25 steps, DPM++ 2M Karras)",
+        "Remotion video rendering",
+        "Quality verification (image, text, audio sync)",
+        "here.now upload automation"
+      ],
+      "tasks": {
+        "task-30": {
+          "status": "complete",
+          "note": "Full E2E pipeline operational with improved quality settings"
+        }
+      }
+    }
+  }
+}
