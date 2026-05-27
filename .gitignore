@@ -53,3 +53,16 @@ Thumbs.db
 .alert-queue.json
 .briefing-queue.json
 .briefing-queue-tmp.json
+
+# More secrets - prevent push protection blocks
+russel-credentials.json
+dadtasticdads-credentials.json
+backups/gog-refresh-token.json
+ytmusic-auth.json
+ytmusic-headers.json
+ytmusic-cookies.txt
+dadjokes-registry.json
+dadtasticdads-output/*.json
+dadtasticdads-output/*.b64
+*.b64
+*.payload.json
