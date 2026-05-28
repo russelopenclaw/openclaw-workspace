@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Morning Briefing Generator
- * Sends a Telegram message with: weather, calendar, reminders, trending topics
+ * Sends a Telegram message with: weather, calendar, reminders
  * 
  * Usage: node morning-briefing.js
  * Cron: 7 AM daily (America/Chicago)
@@ -155,24 +155,7 @@ async function getTodos() {
   }
 }
 
-async function getTrending() {
-  try {
-    const result = execSync(
-      `curl -s "https://trends.google.com/trending/rss?geo=US" --max-time 10 | head -50`,
-      { encoding: 'utf8', timeout: 15000 }
-    );
-    const titles = [];
-    const regex = /<title>(?!Daily)([^<]+)<\/title>/g;
-    let match;
-    while ((match = regex.exec(result)) !== null && titles.length < 5) {
-      titles.push(match[1]);
-    }
-    if (titles.length === 0) return null;
-    return titles.join(', ');
-  } catch (e) {
-    return null;
-  }
-}
+
 
 async function main() {
   const now = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
@@ -218,11 +201,7 @@ async function main() {
     message += '✅ **To Do:**\n' + todos + '\n\n';
   }
 
-  // Trending
-  const trending = await getTrending();
-  if (trending) {
-    message += `🔥 **Trending:** ${trending}\n`;
-  }
+
   
   console.log(message);
 }

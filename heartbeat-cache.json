@@ -3,12 +3,12 @@
     "pg_tasks_in_progress": {
       "data": "0",
       "hash": "str:1:0",
-      "timestamp": "2026-05-27T05:00:01.834Z"
+      "timestamp": "2026-05-28T04:30:02.050Z"
     },
     "pg_subagent_status": {
-      "data": "{\"inProgress\":0,\"timestamp\":\"2026-05-27T05:00:01.835Z\"}",
-      "hash": "str:55:{\"inProgress\":0,\"timestamp\":\"2026-05-27T05:00:01.8",
-      "timestamp": "2026-05-27T05:00:01.835Z"
+      "data": "{\"inProgress\":0,\"timestamp\":\"2026-05-28T04:30:02.050Z\"}",
+      "hash": "str:55:{\"inProgress\":0,\"timestamp\":\"2026-05-28T04:30:02.0",
+      "timestamp": "2026-05-28T04:30:02.050Z"
     },
     "pg_idle_agents": {
       "data": {
@@ -16,7 +16,7 @@
         "timestamp": "2026-03-14T02:33:16.447Z"
       },
       "hash": "obj:checked,timestamp",
-      "timestamp": "2026-05-27T04:46:21.507Z"
+      "timestamp": "2026-05-27T20:46:23.600Z"
     },
     "pg_task_backlog": {
       "data": {
@@ -24,12 +24,12 @@
         "timestamp": "2026-03-14T02:33:16.447Z"
       },
       "hash": "obj:checked,timestamp",
-      "timestamp": "2026-05-27T04:46:21.507Z"
+      "timestamp": "2026-05-27T20:46:23.600Z"
     },
     "pg_stuck_tasks": {
       "data": "0",
       "hash": "str:1:0",
-      "timestamp": "2026-05-27T05:00:01.903Z"
+      "timestamp": "2026-05-28T04:30:02.095Z"
     },
     "system_health": {
       "data": {
@@ -40,7 +40,7 @@
         "timestamp": "2026-03-27T16:22:35.412Z"
       },
       "hash": "obj:disk,gateway,ok,ollama,timestamp",
-      "timestamp": "2026-05-27T05:00:01.952Z"
+      "timestamp": "2026-05-28T04:30:02.129Z"
     },
     "mission_control": {
       "data": {
@@ -48,7 +48,7 @@
         "timestamp": "2026-03-27T16:22:35.436Z"
       },
       "hash": "obj:ok,timestamp",
-      "timestamp": "2026-05-27T05:00:02.462Z"
+      "timestamp": "2026-05-28T04:30:02.637Z"
     },
     "email_unread": {
       "data": {
@@ -57,7 +57,7 @@
         "timestamp": "2026-03-14T02:33:16.669Z"
       },
       "hash": "obj:checked,count,timestamp",
-      "timestamp": "2026-05-27T04:46:22.029Z"
+      "timestamp": "2026-05-28T04:30:02.638Z"
     },
     "calendar_events": {
       "data": {
@@ -65,7 +65,7 @@
         "timestamp": "2026-03-14T02:33:16.674Z"
       },
       "hash": "obj:events,timestamp",
-      "timestamp": "2026-05-27T05:00:02.464Z"
+      "timestamp": "2026-05-28T04:30:02.639Z"
     },
     "weather": {
       "data": {
@@ -73,17 +73,22 @@
         "timestamp": "2026-03-14T02:33:17.031Z"
       },
       "hash": "obj:condition,timestamp",
-      "timestamp": "2026-05-27T04:30:02.420Z"
+      "timestamp": "2026-05-28T04:00:02.673Z"
     },
     "batch_api_results": {
       "data": {
+        "email": {
+          "checked": true,
+          "count": 0,
+          "timestamp": "2026-05-28T04:30:02.638Z"
+        },
         "calendar": {
           "events": "[]",
-          "timestamp": "2026-05-27T05:00:02.464Z"
+          "timestamp": "2026-05-28T04:30:02.639Z"
         }
       },
-      "hash": "obj:calendar",
-      "timestamp": "2026-05-27T05:00:02.464Z"
+      "hash": "obj:calendar,email",
+      "timestamp": "2026-05-28T04:30:02.639Z"
     },
     "briefing_queue": {
       "data": {
@@ -91,7 +96,7 @@
         "timestamp": "2026-03-14T02:33:17.031Z"
       },
       "hash": "obj:pending,timestamp",
-      "timestamp": "2026-05-27T05:00:02.467Z"
+      "timestamp": "2026-05-28T04:30:02.642Z"
     },
     "calendar_alerts": {
       "data": {
@@ -99,7 +104,7 @@
         "alerted": 0
       },
       "hash": "obj:alerted,events",
-      "timestamp": "2026-05-27T05:00:02.557Z"
+      "timestamp": "2026-05-28T04:30:02.732Z"
     }
   },
   "metadata": {
@@ -110,9 +115,9 @@
   "stats": {
     "hits": 0,
     "misses": 10,
-    "skips": 7,
+    "skips": 8,
     "batched": 0,
-    "savedCost": 19,
-    "cycleStart": "2026-05-27T05:00:01.636Z"
+    "savedCost": 27,
+    "cycleStart": "2026-05-28T04:30:01.902Z"
   }
 }
