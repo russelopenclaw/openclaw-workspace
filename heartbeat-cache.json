@@ -3,12 +3,12 @@
     "pg_tasks_in_progress": {
       "data": "0",
       "hash": "str:1:0",
-      "timestamp": "2026-05-28T04:30:02.050Z"
+      "timestamp": "2026-05-29T05:00:01.834Z"
     },
     "pg_subagent_status": {
-      "data": "{\"inProgress\":0,\"timestamp\":\"2026-05-28T04:30:02.050Z\"}",
-      "hash": "str:55:{\"inProgress\":0,\"timestamp\":\"2026-05-28T04:30:02.0",
-      "timestamp": "2026-05-28T04:30:02.050Z"
+      "data": "{\"inProgress\":0,\"timestamp\":\"2026-05-29T05:00:01.834Z\"}",
+      "hash": "str:55:{\"inProgress\":0,\"timestamp\":\"2026-05-29T05:00:01.8",
+      "timestamp": "2026-05-29T05:00:01.834Z"
     },
     "pg_idle_agents": {
       "data": {
@@ -29,7 +29,7 @@
     "pg_stuck_tasks": {
       "data": "0",
       "hash": "str:1:0",
-      "timestamp": "2026-05-28T04:30:02.095Z"
+      "timestamp": "2026-05-29T04:30:01.928Z"
     },
     "system_health": {
       "data": {
@@ -40,7 +40,7 @@
         "timestamp": "2026-03-27T16:22:35.412Z"
       },
       "hash": "obj:disk,gateway,ok,ollama,timestamp",
-      "timestamp": "2026-05-28T04:30:02.129Z"
+      "timestamp": "2026-05-29T05:00:01.869Z"
     },
     "mission_control": {
       "data": {
@@ -48,7 +48,7 @@
         "timestamp": "2026-03-27T16:22:35.436Z"
       },
       "hash": "obj:ok,timestamp",
-      "timestamp": "2026-05-28T04:30:02.637Z"
+      "timestamp": "2026-05-29T05:00:02.344Z"
     },
     "email_unread": {
       "data": {
@@ -57,7 +57,7 @@
         "timestamp": "2026-03-14T02:33:16.669Z"
       },
       "hash": "obj:checked,count,timestamp",
-      "timestamp": "2026-05-28T04:30:02.638Z"
+      "timestamp": "2026-05-29T05:00:02.344Z"
     },
     "calendar_events": {
       "data": {
@@ -65,7 +65,7 @@
         "timestamp": "2026-03-14T02:33:16.674Z"
       },
       "hash": "obj:events,timestamp",
-      "timestamp": "2026-05-28T04:30:02.639Z"
+      "timestamp": "2026-05-29T04:30:02.467Z"
     },
     "weather": {
       "data": {
@@ -73,22 +73,18 @@
         "timestamp": "2026-03-14T02:33:17.031Z"
       },
       "hash": "obj:condition,timestamp",
-      "timestamp": "2026-05-28T04:00:02.673Z"
+      "timestamp": "2026-05-29T04:00:03.502Z"
     },
     "batch_api_results": {
       "data": {
         "email": {
           "checked": true,
           "count": 0,
-          "timestamp": "2026-05-28T04:30:02.638Z"
-        },
-        "calendar": {
-          "events": "[]",
-          "timestamp": "2026-05-28T04:30:02.639Z"
+          "timestamp": "2026-05-29T05:00:02.344Z"
         }
       },
-      "hash": "obj:calendar,email",
-      "timestamp": "2026-05-28T04:30:02.639Z"
+      "hash": "obj:email",
+      "timestamp": "2026-05-29T05:00:02.344Z"
     },
     "briefing_queue": {
       "data": {
@@ -96,7 +92,7 @@
         "timestamp": "2026-03-14T02:33:17.031Z"
       },
       "hash": "obj:pending,timestamp",
-      "timestamp": "2026-05-28T04:30:02.642Z"
+      "timestamp": "2026-05-29T05:00:02.348Z"
     },
     "calendar_alerts": {
       "data": {
@@ -104,7 +100,7 @@
         "alerted": 0
       },
       "hash": "obj:alerted,events",
-      "timestamp": "2026-05-28T04:30:02.732Z"
+      "timestamp": "2026-05-29T05:00:02.439Z"
     }
   },
   "metadata": {
@@ -113,11 +109,11 @@
     "optimized": true
   },
   "stats": {
-    "hits": 0,
-    "misses": 10,
-    "skips": 8,
+    "hits": 1,
+    "misses": 8,
+    "skips": 6,
     "batched": 0,
-    "savedCost": 27,
-    "cycleStart": "2026-05-28T04:30:01.902Z"
+    "savedCost": 21,
+    "cycleStart": "2026-05-29T05:00:01.693Z"
   }
 }
