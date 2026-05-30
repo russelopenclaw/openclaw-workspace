@@ -3,12 +3,12 @@
     "pg_tasks_in_progress": {
       "data": "0",
       "hash": "str:1:0",
-      "timestamp": "2026-05-30T04:30:01.238Z"
+      "timestamp": "2026-05-30T05:00:02.207Z"
     },
     "pg_subagent_status": {
-      "data": "{\"inProgress\":0,\"timestamp\":\"2026-05-30T04:30:01.238Z\"}",
-      "hash": "str:55:{\"inProgress\":0,\"timestamp\":\"2026-05-30T04:30:01.2",
-      "timestamp": "2026-05-30T04:30:01.238Z"
+      "data": "{\"inProgress\":0,\"timestamp\":\"2026-05-30T05:00:02.207Z\"}",
+      "hash": "str:55:{\"inProgress\":0,\"timestamp\":\"2026-05-30T05:00:02.2",
+      "timestamp": "2026-05-30T05:00:02.207Z"
     },
     "pg_idle_agents": {
       "data": {
@@ -29,7 +29,7 @@
     "pg_stuck_tasks": {
       "data": "0",
       "hash": "str:1:0",
-      "timestamp": "2026-05-30T04:30:01.283Z"
+      "timestamp": "2026-05-30T05:00:02.251Z"
     },
     "system_health": {
       "data": {
@@ -40,7 +40,7 @@
         "timestamp": "2026-03-27T16:22:35.412Z"
       },
       "hash": "obj:disk,gateway,ok,ollama,timestamp",
-      "timestamp": "2026-05-30T04:30:01.318Z"
+      "timestamp": "2026-05-30T05:00:02.285Z"
     },
     "mission_control": {
       "data": {
@@ -48,7 +48,7 @@
         "timestamp": "2026-03-27T16:22:35.436Z"
       },
       "hash": "obj:ok,timestamp",
-      "timestamp": "2026-05-30T04:30:01.808Z"
+      "timestamp": "2026-05-30T05:00:02.735Z"
     },
     "email_unread": {
       "data": {
@@ -57,7 +57,7 @@
         "timestamp": "2026-03-14T02:33:16.669Z"
       },
       "hash": "obj:checked,count,timestamp",
-      "timestamp": "2026-05-30T04:30:01.808Z"
+      "timestamp": "2026-05-30T05:00:02.736Z"
     },
     "calendar_events": {
       "data": {
@@ -65,7 +65,7 @@
         "timestamp": "2026-03-14T02:33:16.674Z"
       },
       "hash": "obj:events,timestamp",
-      "timestamp": "2026-05-30T04:30:01.809Z"
+      "timestamp": "2026-05-30T05:00:02.738Z"
     },
     "weather": {
       "data": {
@@ -88,7 +88,7 @@
         }
       },
       "hash": "obj:calendar,email",
-      "timestamp": "2026-05-30T04:30:01.810Z"
+      "timestamp": "2026-05-30T05:00:02.738Z"
     },
     "briefing_queue": {
       "data": {
@@ -96,7 +96,7 @@
         "timestamp": "2026-03-14T02:33:17.031Z"
       },
       "hash": "obj:pending,timestamp",
-      "timestamp": "2026-05-30T04:30:01.812Z"
+      "timestamp": "2026-05-30T05:00:02.741Z"
     },
     "calendar_alerts": {
       "data": {
@@ -104,7 +104,7 @@
         "alerted": 0
       },
       "hash": "obj:alerted,events",
-      "timestamp": "2026-05-30T04:30:01.901Z"
+      "timestamp": "2026-05-30T05:00:02.841Z"
     }
   },
   "metadata": {
@@ -115,9 +115,9 @@
   "stats": {
     "hits": 0,
     "misses": 10,
-    "skips": 8,
+    "skips": 9,
     "batched": 0,
-    "savedCost": 27,
-    "cycleStart": "2026-05-30T04:30:01.095Z"
+    "savedCost": 28,
+    "cycleStart": "2026-05-30T05:00:02.053Z"
   }
 }
