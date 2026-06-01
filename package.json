@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@mem0/openclaw-mem0": "^0.1.2",
     "puppeteer": "^24.37.5"
   }
 }
