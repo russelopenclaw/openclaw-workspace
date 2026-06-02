@@ -9,9 +9,9 @@
 - Role: Primary agent / orchestrator / alpha agent
 - Named after Batman's butler - proactive, gets things done
 - **Tier:** Tier 1 (Master Orchestrator)
-- **Model:** qwen3.5:cloud (397B MoE, 256K context)
+- **Model:** GLM-5.1 (general orchestration, strong instruction following)
 - **Reasoning:** ON (for strategy, planning, decision-making) - **session-scoped, must toggle each session**
-- **Vision:** YES — For image analysis, ALWAYS use `qwen3.5:cloud` (NOT OpenAI/Claude/other)
+- **Vision:** YES — For image analysis, use `minimax-m3:cloud` (native multimodal) or `glm-5.1:cloud`
 - Spawned sub-agents with reasoning=OFF for execution tasks
 
 ## Reasoning Mode Note (2026-03-14)
@@ -22,12 +22,35 @@
 
 ## Model Architecture (Multi-Tier System)
 
+### Model Routing (Updated 2026-06-01)
 
-- **Tier 1:** Alfred (qwen3.5:cloud, reasoning ON) — orchestrator
-- **Tier 2:** Cloud models (glm-5.1, qwen3-coder-next, gemma4, nemotron, deepseek-v4-flash) — spawn as sub-agents
-- **Tier 3:** Sub-agents (minimax for tools, gemma4 for general) — reasoning OFF
-- **DeepSeek V4 Flash:** 284B MoE, 13B active, 1M context, strong coding (91.6% LiveCodeBench) and agentic tasks, cheap ($0.14/$0.28 per M tokens)
-- **DeepSeek V4 Pro:** Reasoning-capable, 256K context — added 2026-05-20, available via `deepseek-v4-pro:cloud`
+| Task | Best Model | Why |
+| ---------------------------------- | -------------------- | ------------------------------------------------------ |
+| Orchestration (Alfred) | GLM-5.1 | Good general instruction following, established |
+| Deep reasoning | DeepSeek V4 Pro | Reasoning-capable, 256K context |
+| Long-context agents / multimodal | MiniMax M3 | 1M context, native multimodal, frontier agentic |
+| Fast coding execution | DeepSeek V4 Flash | Cheap, fast, strong coding, 1M context |
+| General analysis | Gemma4 | Solid general-purpose |
+| Tool-heavy workflows | MiniMax M2.7 or M3 | Proven tool use; M3 for longer contexts |
+
+### MiniMax M3 Notes (Added 2026-06-01)
+- **Strengths:** Frontier coding (59% SWE-Bench Pro), 1M context, native multimodal, BrowseComp 83.5 (beats Opus 4.7), long-horizon autonomous agents
+- **Weaknesses:** Instruction following mediocre (62nd percentile), vendor benchmarks only (day-one), promo pricing temporary
+- **Use for:** Whole-repo analysis, long agent sessions, video understanding, autonomous browsing/research, multi-step agentic workflows
+- **Avoid for:** General chat/instruction tasks, proven-track-record needs
+- **Price:** $0.30/$1.20 promo, $0.60/$2.40 standard (per M tokens)
+
+
+- **Tier 1:** Alfred (GLM-5.1, reasoning ON) — orchestrator
+- **Tier 2:** Cloud models — spawn as sub-agents, reasoning OFF
+- **DeepSeek V4 Pro:** Reasoning-capable, 256K context — deep reasoning tasks — `deepseek-v4-pro:cloud`
+- **MiniMax M3:** 1M context, native multimodal, frontier coding/agents — long-context & multimodal tasks — `minimax-m3:cloud`
+- **DeepSeek V4 Flash:** 284B MoE, 1M context, fast coding execution — `deepseek-v4-flash:cloud`
+- **MiniMax M2.7:** Tool-heavy workflows — `minimax-m2.7:cloud`
+- **Gemma4:** 31B, general analysis — `gemma4:31b-cloud`
+- **Qwen3-Coder-Next:** Deep code specialist — `qwen3-coder-next:cloud`
+- **Nemotron-3-Super:** NVIDIA flagship, reasoning-heavy — `nemotron-3-super:cloud`
+- **GLM-5.1:** General complex analysis (also Alfred's model) — `glm-5.1:cloud`
 
 ## Projects
 - **Kanban Board** (completed 2026-02-20, migrated to PostgreSQL 2026-03-05)

@@ -3,12 +3,12 @@
     "pg_tasks_in_progress": {
       "data": "0",
       "hash": "str:1:0",
-      "timestamp": "2026-06-01T04:30:01.841Z"
+      "timestamp": "2026-06-02T05:00:01.525Z"
     },
     "pg_subagent_status": {
-      "data": "{\"inProgress\":0,\"timestamp\":\"2026-06-01T04:30:01.841Z\"}",
-      "hash": "str:55:{\"inProgress\":0,\"timestamp\":\"2026-06-01T04:30:01.8",
-      "timestamp": "2026-06-01T04:30:01.841Z"
+      "data": "{\"inProgress\":0,\"timestamp\":\"2026-06-02T05:00:01.525Z\"}",
+      "hash": "str:55:{\"inProgress\":0,\"timestamp\":\"2026-06-02T05:00:01.5",
+      "timestamp": "2026-06-02T05:00:01.525Z"
     },
     "pg_idle_agents": {
       "data": {
@@ -16,7 +16,7 @@
         "timestamp": "2026-03-14T02:33:16.447Z"
       },
       "hash": "obj:checked,timestamp",
-      "timestamp": "2026-05-31T22:46:16.240Z"
+      "timestamp": "2026-06-02T04:46:17.922Z"
     },
     "pg_task_backlog": {
       "data": {
@@ -24,12 +24,12 @@
         "timestamp": "2026-03-14T02:33:16.447Z"
       },
       "hash": "obj:checked,timestamp",
-      "timestamp": "2026-05-31T22:46:16.240Z"
+      "timestamp": "2026-06-02T04:46:17.922Z"
     },
     "pg_stuck_tasks": {
       "data": "0",
       "hash": "str:1:0",
-      "timestamp": "2026-06-01T04:30:01.886Z"
+      "timestamp": "2026-06-02T04:46:17.967Z"
     },
     "system_health": {
       "data": {
@@ -40,7 +40,7 @@
         "timestamp": "2026-03-27T16:22:35.412Z"
       },
       "hash": "obj:disk,gateway,ok,ollama,timestamp",
-      "timestamp": "2026-06-01T04:30:01.920Z"
+      "timestamp": "2026-06-02T05:00:01.559Z"
     },
     "mission_control": {
       "data": {
@@ -48,7 +48,7 @@
         "timestamp": "2026-03-27T16:22:35.436Z"
       },
       "hash": "obj:ok,timestamp",
-      "timestamp": "2026-06-01T04:30:02.393Z"
+      "timestamp": "2026-06-02T05:00:02.094Z"
     },
     "email_unread": {
       "data": {
@@ -57,7 +57,7 @@
         "timestamp": "2026-03-14T02:33:16.669Z"
       },
       "hash": "obj:checked,count,timestamp",
-      "timestamp": "2026-06-01T04:30:02.394Z"
+      "timestamp": "2026-06-02T04:46:18.490Z"
     },
     "calendar_events": {
       "data": {
@@ -65,7 +65,7 @@
         "timestamp": "2026-03-14T02:33:16.674Z"
       },
       "hash": "obj:events,timestamp",
-      "timestamp": "2026-06-01T04:00:02.471Z"
+      "timestamp": "2026-06-02T04:46:18.492Z"
     },
     "weather": {
       "data": {
@@ -73,22 +73,26 @@
         "timestamp": "2026-03-14T02:33:17.031Z"
       },
       "hash": "obj:condition,timestamp",
-      "timestamp": "2026-06-01T04:30:02.771Z"
+      "timestamp": "2026-06-02T04:46:18.763Z"
     },
     "batch_api_results": {
       "data": {
         "email": {
           "checked": true,
           "count": 0,
-          "timestamp": "2026-06-01T04:30:02.394Z"
+          "timestamp": "2026-06-02T04:46:18.490Z"
+        },
+        "calendar": {
+          "events": "[]",
+          "timestamp": "2026-06-02T04:46:18.492Z"
         },
         "weather": {
-          "condition": "Clear  +60°F ↙5mph",
-          "timestamp": "2026-06-01T04:30:02.771Z"
+          "condition": "Clear  +64°F ↙7mph",
+          "timestamp": "2026-06-02T04:46:18.763Z"
         }
       },
-      "hash": "obj:email,weather",
-      "timestamp": "2026-06-01T04:30:02.771Z"
+      "hash": "obj:calendar,email,weather",
+      "timestamp": "2026-06-02T04:46:18.763Z"
     },
     "briefing_queue": {
       "data": {
@@ -96,7 +100,7 @@
         "timestamp": "2026-03-14T02:33:17.031Z"
       },
       "hash": "obj:pending,timestamp",
-      "timestamp": "2026-06-01T04:30:02.775Z"
+      "timestamp": "2026-06-02T05:00:02.097Z"
     },
     "calendar_alerts": {
       "data": {
@@ -104,7 +108,7 @@
         "alerted": 0
       },
       "hash": "obj:alerted,events",
-      "timestamp": "2026-06-01T04:30:02.870Z"
+      "timestamp": "2026-06-02T05:00:02.189Z"
     }
   },
   "metadata": {
@@ -113,11 +117,11 @@
     "optimized": true
   },
   "stats": {
-    "hits": 0,
-    "misses": 10,
-    "skips": 8,
-    "batched": 0,
-    "savedCost": 25,
-    "cycleStart": "2026-06-01T04:30:01.695Z"
+    "hits": 1,
+    "misses": 8,
+    "skips": 5,
+    "batched": 3,
+    "savedCost": 13,
+    "cycleStart": "2026-06-02T05:00:01.327Z"
   }
 }
