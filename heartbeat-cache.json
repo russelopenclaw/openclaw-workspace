@@ -3,12 +3,12 @@
     "pg_tasks_in_progress": {
       "data": "0",
       "hash": "str:1:0",
-      "timestamp": "2026-06-02T05:00:01.525Z"
+      "timestamp": "2026-06-03T04:46:13.740Z"
     },
     "pg_subagent_status": {
-      "data": "{\"inProgress\":0,\"timestamp\":\"2026-06-02T05:00:01.525Z\"}",
-      "hash": "str:55:{\"inProgress\":0,\"timestamp\":\"2026-06-02T05:00:01.5",
-      "timestamp": "2026-06-02T05:00:01.525Z"
+      "data": "{\"inProgress\":0,\"timestamp\":\"2026-06-03T04:46:13.741Z\"}",
+      "hash": "str:55:{\"inProgress\":0,\"timestamp\":\"2026-06-03T04:46:13.7",
+      "timestamp": "2026-06-03T04:46:13.741Z"
     },
     "pg_idle_agents": {
       "data": {
@@ -16,7 +16,7 @@
         "timestamp": "2026-03-14T02:33:16.447Z"
       },
       "hash": "obj:checked,timestamp",
-      "timestamp": "2026-06-02T04:46:17.922Z"
+      "timestamp": "2026-06-03T04:46:13.816Z"
     },
     "pg_task_backlog": {
       "data": {
@@ -24,12 +24,12 @@
         "timestamp": "2026-03-14T02:33:16.447Z"
       },
       "hash": "obj:checked,timestamp",
-      "timestamp": "2026-06-02T04:46:17.922Z"
+      "timestamp": "2026-06-03T04:46:13.816Z"
     },
     "pg_stuck_tasks": {
       "data": "0",
       "hash": "str:1:0",
-      "timestamp": "2026-06-02T04:46:17.967Z"
+      "timestamp": "2026-06-03T04:46:13.859Z"
     },
     "system_health": {
       "data": {
@@ -40,7 +40,7 @@
         "timestamp": "2026-03-27T16:22:35.412Z"
       },
       "hash": "obj:disk,gateway,ok,ollama,timestamp",
-      "timestamp": "2026-06-02T05:00:01.559Z"
+      "timestamp": "2026-06-03T04:46:13.893Z"
     },
     "mission_control": {
       "data": {
@@ -48,7 +48,7 @@
         "timestamp": "2026-03-27T16:22:35.436Z"
       },
       "hash": "obj:ok,timestamp",
-      "timestamp": "2026-06-02T05:00:02.094Z"
+      "timestamp": "2026-06-03T04:46:14.359Z"
     },
     "email_unread": {
       "data": {
@@ -57,7 +57,7 @@
         "timestamp": "2026-03-14T02:33:16.669Z"
       },
       "hash": "obj:checked,count,timestamp",
-      "timestamp": "2026-06-02T04:46:18.490Z"
+      "timestamp": "2026-06-03T04:46:14.360Z"
     },
     "calendar_events": {
       "data": {
@@ -65,7 +65,7 @@
         "timestamp": "2026-03-14T02:33:16.674Z"
       },
       "hash": "obj:events,timestamp",
-      "timestamp": "2026-06-02T04:46:18.492Z"
+      "timestamp": "2026-06-03T04:46:14.361Z"
     },
     "weather": {
       "data": {
@@ -73,26 +73,22 @@
         "timestamp": "2026-03-14T02:33:17.031Z"
       },
       "hash": "obj:condition,timestamp",
-      "timestamp": "2026-06-02T04:46:18.763Z"
+      "timestamp": "2026-06-03T03:46:17.045Z"
     },
     "batch_api_results": {
       "data": {
         "email": {
           "checked": true,
           "count": 0,
-          "timestamp": "2026-06-02T04:46:18.490Z"
+          "timestamp": "2026-06-03T04:46:14.360Z"
         },
         "calendar": {
           "events": "[]",
-          "timestamp": "2026-06-02T04:46:18.492Z"
-        },
-        "weather": {
-          "condition": "Clear  +64°F ↙7mph",
-          "timestamp": "2026-06-02T04:46:18.763Z"
+          "timestamp": "2026-06-03T04:46:14.361Z"
         }
       },
-      "hash": "obj:calendar,email,weather",
-      "timestamp": "2026-06-02T04:46:18.763Z"
+      "hash": "obj:calendar,email",
+      "timestamp": "2026-06-03T04:46:14.361Z"
     },
     "briefing_queue": {
       "data": {
@@ -100,7 +96,7 @@
         "timestamp": "2026-03-14T02:33:17.031Z"
       },
       "hash": "obj:pending,timestamp",
-      "timestamp": "2026-06-02T05:00:02.097Z"
+      "timestamp": "2026-06-03T04:46:14.531Z"
     },
     "calendar_alerts": {
       "data": {
@@ -108,7 +104,7 @@
         "alerted": 0
       },
       "hash": "obj:alerted,events",
-      "timestamp": "2026-06-02T05:00:02.189Z"
+      "timestamp": "2026-06-03T04:46:14.632Z"
     }
   },
   "metadata": {
@@ -117,11 +113,11 @@
     "optimized": true
   },
   "stats": {
-    "hits": 1,
-    "misses": 8,
-    "skips": 5,
-    "batched": 3,
-    "savedCost": 13,
-    "cycleStart": "2026-06-02T05:00:01.327Z"
+    "hits": 0,
+    "misses": 10,
+    "skips": 10,
+    "batched": 0,
+    "savedCost": 31,
+    "cycleStart": "2026-06-03T04:46:13.478Z"
   }
 }
