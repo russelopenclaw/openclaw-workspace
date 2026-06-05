@@ -1,7 +1,7 @@
 {
-  "consecutiveFailures": 753,
+  "consecutiveFailures": 840,
   "lastSuccess": null,
-  "lastFailure": "2026-06-04T04:46:17.688Z",
-  "lastCheck": "2026-06-04T04:46:17.688Z",
+  "lastFailure": "2026-06-05T05:00:02.685Z",
+  "lastCheck": "2026-06-05T05:00:02.685Z",
   "recovered": true
 }
