@@ -166,14 +166,14 @@ async function createTask(options) {
       taskId,
       options.title,
       formattedDescription,
-      'READY', // Tasks start in READY, not IN_PROGRESS
+      'ready', // Tasks start in 'ready' (lowercase, matching DB constraint chk_column_name)
       options.agent,
       options.priority,
       options.deliverables,
       options.criteria,
       options.parent,
     ]);
-    
+
     console.log('');
     console.log(`✅ Task created: ${taskId}`);
     console.log('');
@@ -181,7 +181,7 @@ async function createTask(options) {
     console.log(formattedDescription);
     console.log('');
     console.log('--- Database Record ---');
-    console.log(`Column: READY`);
+    console.log(`Column: ready`);
     console.log(`Priority: ${options.priority}`);
     console.log(`Created: ${result.rows[0].created_at}`);
     console.log('');
